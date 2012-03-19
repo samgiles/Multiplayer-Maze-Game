@@ -2,6 +2,7 @@
 <project name="MazeGame Ant Build" default="build-debug" basedir=".">
 	   <property environment="ENV"/> 
 <target name="build-debug" >
+  <mkdir dir="${basedir}/bin" />
   <javac srcdir="src" destdir="bin" debug="true" includes="src/**/*.java" />
 </target>
 	
@@ -18,6 +19,7 @@
 	</target>
 	
 	<target name="jdepend" depends="build-debug">
+	  <mkdir dir="${basedir}/build/logs"/>
 	  <jdepend format="xml" outputfile="build/logs/jdepend.xml">
 	    <exclude name="java.*" />
 	  	<exclude name="javax.*" />
@@ -25,7 +27,7 @@
 	</target>
 	
 <target name="unittest" description="Execute unit tests" depends="build-debug">
-	    <mkdir dir="build/junit"/>
+	    <mkdir dir="${basedir}/build/junit"/>
 	    <junit printsummary="true" failureproperty="junit.failure">
 	      <batchtest todir="build/junit" haltonfailure="no">
 	      	<fileset dir="src" casesensitive="yes">
