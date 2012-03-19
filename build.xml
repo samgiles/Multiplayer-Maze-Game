@@ -3,7 +3,7 @@
 	   <property environment="ENV"/> 
 <target name="build-debug" >
   <mkdir dir="${basedir}/bin" />
-  <javac srcdir="src" destdir="bin" debug="true" includes="src/**/*.java" />
+  <javac srcdir="src" destdir="bin" debug="true" />
 </target>
 	
 	<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
