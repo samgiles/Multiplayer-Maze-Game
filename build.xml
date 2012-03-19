@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project name="MazeGame Ant Build" default="build-debug" basedir=".">
+	   <property environment="ENV"/> 
+<target name="build-debug" >
+  <javac srcdir="src" destdir="bin" debug="true" includes="src/**/*.java" />
+</target>
+	
+	<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
+	<target name="pmd">
+		 <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
+		  <pmd rulesetfiles="rulesets/basic.xml,rulesets/design.xml,rulesets/coupling.xml,rulesets/unusedcode.xml,rulesets/unused.xml">
+		  	<formatter type="xml" toFile="${basedir}/build/logs/pmd.xml" />
+		  	<fileset dir="${basedir}/src">
+		  		<include name="**/*.java"/>
+		  		<exclude name="**/*Test.java" />
+		  	</fileset>
+		  </pmd>
+	</target>
+	
+	<target name="jdepend" depends="build-debug">
+	  <jdepend format="xml" outputfile="build/logs/jdepend.xml">
+	    <exclude name="java.*" />
+	  	<exclude name="javax.*" />
+	  </jdepend>
+	</target>
+	
+<target name="unittest" description="Execute unit tests" depends="build-debug">
+	    <mkdir dir="build/junit"/>
+	    <junit printsummary="true" failureproperty="junit.failure">
+	      <batchtest todir="build/junit" haltonfailure="no">
+	      	<fileset dir="src" casesensitive="yes">
+	      	  <patternset id="test.sources">
+	      	    <include name="**/*Test.java"/>
+	      	  </patternset>
+	      	</fileset>
+	        <formatter type="xml"/>
+	      </batchtest>
+	    </junit>
+	    <fail message="Test failure detected, check test results." if="junit.failure" />
+	  </target>
+</project>
