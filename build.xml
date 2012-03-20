@@ -1,64 +1,105 @@
 <?xml version="1.0"?>
-<project name="MazeGame Ant Build" default="build-debug" basedir=".">
+<project name="MazeGame Ant Build" default="build" basedir=".">
+	   
 	   <property environment="ENV"/> 
-<target name="build-debug" >
-  <mkdir dir="${basedir}/bin" />
-  <javac srcdir="src" destdir="bin" debug="true" />
-</target>
-	
-	<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
-	<target name="pmd">
-		<mkdir dir="${basedir}/build/logs"/>
-		 <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
-		  <pmd rulesetfiles="${basedir}/build/pmdrules.xml">
-		  	<formatter type="xml" toFile="${basedir}/build/logs/pmd.xml" />
-		  	<fileset dir="${basedir}/src">
-		  		<include name="**/*.java"/>
-		  		<exclude name="**/*Test.java" />
-		  	</fileset>
-		  </pmd>
-	</target>
-	
-	<target name="cpd">
-	    <taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" />
-	    <cpd minimumTokenCount="100" format="xml" outputFile="build/logs/cpd.xml">
-	        <fileset dir="${basedir}/src">
-	            <include name="**/*.java"/>
-	        </fileset>
-	    </cpd>
-	</target>
-	
-	
-	<target name="jdepend">
-	  <mkdir dir="${basedir}/build/logs"/>
+	   
+	   <path id="cobertura.classpath">
+			<fileset dir="/home/sam/cobertura">
+				<include name="cobertura.jar" />
+				<include name="lib/**/*.jar" />
+			</fileset>
+	   </path>
+	   
+	   <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+	   
+	   <target name="init">
+			<mkdir dir="bin" />
+			<mkdir dir="coverage" />
+			<mkdir dir="build/logs" />
+	   </target>
+	   
+	   <target name="compile" depends="init">
+			<javac srcdir="src" destdir="bin" debug="true">
+				<classpath refid="cobertura.classpath" />
+	   		</javac>
+	   </target>
+	   
+	   <target name="instrument" depends="init,compile">
+			<delete file="cobertura.ser"/>
+			<delete dir="coverage" />
+			<cobertura-instrument todir="coverage">
+				<ignore regex="org.apache.log4j.*" />
+				<fileset dir="bin">
+					<include name="**/*.class" />
+					<exclude name="**/*Test.class" />
+				</fileset>
+			</cobertura-instrument>
+		</target>
 		
-	  <jdepend format="xml" outputfile="build/logs/jdepend.xml">
-	  	<classespath>
-	  	   <pathelement location="${basedir}/bin"/>
-	  	</classespath>
-	    <exclude name="java.*" />
-	  	<exclude name="javax.*" />
-	  </jdepend>
-	</target>
+		<target name="test" depends="init,compile">
+			<junit fork="yes" dir="${basedir}" failureProperty="test.failed">
+				<classpath location="coverage" />
+				<classpath location="bin" />
+				<classpath refid="cobertura.classpath" />
+				<formatter type="xml" />
+				<test name="${testcase}" todir="" if="testcase" />
+				<batchtest todir="${basedir}/build/junit" unless="testcase" haltonfailure="no">
+					<fileset dir="src">
+						<include name="**/*Test.java" />
+					</fileset>
+					<formatter type="xml"/>
+				</batchtest>
+			</junit>
+		</target>
+		
+		<target name="coverage-check">
+			<cobertura-check branchrate="34" totallinerate="100" />
+		</target>
+
+		<target name="coverage-report">
+			<cobertura-report srcdir="src" destdir="build/logs" format="xml" />
+		</target>
+		
+		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
+		<target name="pmd">
+			<mkdir dir="${basedir}/build/logs"/>
+			<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
+			<pmd rulesetfiles="${basedir}/build/pmdrules.xml">
+				<formatter type="xml" toFile="${basedir}/build/logs/pmd.xml" />
+				  	<fileset dir="${basedir}/src">
+			  		<include name="**/*.java"/>
+			  		<exclude name="**/*Test.java" />
+			  	</fileset>
+			</pmd>
+		</target>
+	
+		<target name="cpd">
+		    <taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" />
+		    <cpd minimumTokenCount="100" format="xml" outputFile="build/logs/cpd.xml">
+		        <fileset dir="${basedir}/src">
+		            <include name="**/*.java"/>
+		        </fileset>
+		    </cpd>
+		</target>
 	
 	
-	
-     <target name="unittest" description="Execute unit tests" depends="build-debug">
-	    <mkdir dir="${basedir}/build/junit"/>
-	    <junit printsummary="true" failureproperty="junit.failure">
-	    	  <classpath>
-	    	    <pathelement location="${basedir}/bin/tests"/>
-	    	<pathelement path="${java.class.path}"/>
-	      </classpath>
-	      <batchtest todir="${basedir}/build/junit" haltonfailure="no">
-	      	<fileset dir="${basedir}/src" casesensitive="yes">
-	      	  <patternset id="test.sources">
-	      	    <include name="**/*Test.java"/>
-	      	  </patternset>
-	      	</fileset>
-	        <formatter type="xml"/>
-	      </batchtest>
-	    </junit>
-	    <fail message="Test failure detected, check test results." if="junit.failure" />
-	  </target>
+		<target name="jdepend">
+			<mkdir dir="${basedir}/build/logs"/>
+		
+		  	<jdepend format="xml" outputfile="build/logs/jdepend.xml">
+	  			<classespath>
+	  			   <pathelement location="${basedir}/bin"/>
+	  			</classespath>
+	   	 		<exclude name="java.*" />
+	  			<exclude name="javax.*" />
+	 	 	</jdepend>
+		</target>
+		
+		<target name="clean" description="Remove all files created by the build/test process.">
+			<delete dir="coverage" />
+			<delete file="cobertura.log" />
+			<delete file="cobertura.ser" />
+		</target>
+
+		<target name="build" depends="compile,instrument,test,coverage-report,pmd,cpd,jdepend,clean"/>
 </project>
