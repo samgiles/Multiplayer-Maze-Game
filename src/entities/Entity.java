@@ -73,8 +73,6 @@ public class Entity {
 	}
 	
 	/**
-=======
->>>>>>> branch 'master' of git@github.com:aPhRo/Multiplayer-Maze-Game.git
 	 * Get the current score for this entity.
 	 * @return int The entities score.
 	 */
