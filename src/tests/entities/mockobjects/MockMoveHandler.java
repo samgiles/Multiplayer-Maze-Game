@@ -3,7 +3,8 @@
  */
 package tests.entities.mockobjects;
 
-import entities.MoveDirection;
+import com.MoveDirection;
+
 import entities.MoveHandler;
 
 /**

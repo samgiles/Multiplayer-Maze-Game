@@ -1,4 +1,4 @@
-package entities;
+package com;
 
 /**
  * Represents the direction of a game control.
