@@ -34,8 +34,12 @@
 <target name="unittest" description="Execute unit tests" depends="build-debug">
 	    <mkdir dir="${basedir}/build/junit"/>
 	    <junit printsummary="true" failureproperty="junit.failure">
-	      <batchtest todir="build/junit" haltonfailure="no">
-	      	<fileset dir="src" casesensitive="yes">
+	    	  <classpath>
+	    	    <pathelement location="${basedir}/bin/tests"/>
+	    	<pathelement path="${java.class.path}"/>
+	      </classpath>
+	      <batchtest todir="${basedir}/build/junit" haltonfailure="no">
+	      	<fileset dir="${basedir}/src" casesensitive="yes">
 	      	  <patternset id="test.sources">
 	      	    <include name="**/*Test.java"/>
 	      	  </patternset>
