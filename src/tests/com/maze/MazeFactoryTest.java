@@ -38,11 +38,11 @@ public class MazeFactoryTest {
 	@Test
 	public void testSimpleGridCreator() {
 		IMazeGrid grid = MazeFactory.simpleGrid(mazeFileName, 200, 100);
-		
-		assertTrue(grid.getSizeX() == 100);
-		assertTrue(grid.getSizeY() == 100);
-		
 		assertTrue(mazeFileExists());
+		int x = grid.getSizeX();
+		int y = grid.getSizeY();
+		assertTrue("The X size of the grid was " + String.valueOf(x) + ", should have been 200", x == 200);
+		assertTrue("The Y size of the grid was " + String.valueOf(y) + ", should have been 100", y == 100);
 	}
 
 	private boolean mazeFileExists() {
