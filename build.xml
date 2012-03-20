@@ -19,9 +19,13 @@
 		  </pmd>
 	</target>
 	
-	<target name="jdepend" depends="build-debug">
+	<target name="jdepend">
 	  <mkdir dir="${basedir}/build/logs"/>
+		
 	  <jdepend format="xml" outputfile="build/logs/jdepend.xml">
+	  	<classespath>
+	  	   <pathelement location="${basedir}/bin"/>
+	  	</classespath>
 	    <exclude name="java.*" />
 	  	<exclude name="javax.*" />
 	  </jdepend>
