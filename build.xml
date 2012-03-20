@@ -8,6 +8,7 @@
 	
 	<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
 	<target name="pmd">
+		<mkdir dir="${basedir}/build/logs"/>
 		 <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
 		  <pmd rulesetfiles="${basedir}/build/pmdrules.xml">
 		  	<formatter type="xml" toFile="${basedir}/build/logs/pmd.xml" />
