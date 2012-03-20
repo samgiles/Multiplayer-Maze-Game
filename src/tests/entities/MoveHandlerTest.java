@@ -15,10 +15,14 @@ import tests.entities.mockobjects.MockMovementListener;
 public class MoveHandlerTest {
 
 	private MockMoveHandler moveHandler;
+	private MockMovementListener mockListener;
 	
 	@Before
 	public void setUp() throws Exception {
 		moveHandler = new MockMoveHandler();
+		mockListener = new MockMovementListener();
+		
+		moveHandler.listen(mockListener);
 	}
 
 	@After
@@ -36,10 +40,7 @@ public class MoveHandlerTest {
 
 		// Each time an anonymous method is called below they switch off their respective bit using the XOR operatotor
 		// If the assertion that flags is == to 0 is true at the end the test should pass.
-		MockMovementListener mockListener = new MockMovementListener();
-		
-		moveHandler.listen(mockListener);
-		
+
 		moveHandler.triggerUp();
 		assertTrue("Test the up listen handler", (mockListener.getFlags() ^ MockMovementListener.UPBIT) == 0x00000F);
 		// flip the bit back and test, why not?
@@ -61,6 +62,11 @@ public class MoveHandlerTest {
 		assertTrue("Test the right listen handler", (mockListener.getFlags() ^ MockMovementListener.RIGHTBIT) == 0x00000F);
 		moveHandler.triggerRight();
 		assertTrue("Re Test the right listen handler", mockListener.getFlags() == 0x00000F);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testIllegalMoveNotification() {
+		moveHandler.triggerIllegalArgument();
 	}
 
 }

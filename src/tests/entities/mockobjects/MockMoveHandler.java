@@ -31,4 +31,8 @@ public class MockMoveHandler extends MoveHandler {
 	public void triggerRight() {
 		this.notify(MoveDirection.RIGHT);
 	}
+	
+	public void triggerIllegalArgument() {
+		this.notify(MoveDirection.valueOf("Invalid"));
+	}
 }
