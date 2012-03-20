@@ -19,6 +19,16 @@
 		  </pmd>
 	</target>
 	
+	<target name="cpd">
+	    <taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" />
+	    <cpd minimumTokenCount="100" format="xml" outputFile="build/logs/cpd.xml">
+	        <fileset dir="${basedir}/src">
+	            <include name="**/*.java"/>
+	        </fileset>
+	    </cpd>
+	</target>
+	
+	
 	<target name="jdepend">
 	  <mkdir dir="${basedir}/build/logs"/>
 		
@@ -31,7 +41,9 @@
 	  </jdepend>
 	</target>
 	
-<target name="unittest" description="Execute unit tests" depends="build-debug">
+	
+	
+     <target name="unittest" description="Execute unit tests" depends="build-debug">
 	    <mkdir dir="${basedir}/build/junit"/>
 	    <junit printsummary="true" failureproperty="junit.failure">
 	    	  <classpath>
