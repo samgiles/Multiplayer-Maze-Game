@@ -8,7 +8,7 @@ public class EntityController {
 	/**
 	 * The entity that this Entity Controller is controlling.
 	 */
-	private Entity entity;
+	private final Entity entity;
   
 	
 	public EntityController(Entity entity) {
