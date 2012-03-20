@@ -1,9 +1,9 @@
 /**
  * 
  */
-package store;
+package entities;
 
-import entities.Entity;
+import store.IDataSource;
 
 /**
  * @author 1021372
