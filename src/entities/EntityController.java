@@ -24,6 +24,9 @@ public class EntityController {
 		this.registerMovementListener();
 	}
 	
+	/**
+	 * Register this EntityControllers MovementListener anonymous class, defined in MovemenetListener.getListener with the move handler.
+	 */
 	private void registerMovementListener() {
 		this.moveHandler.listen(this.getListener());
 	}
@@ -58,7 +61,10 @@ public class EntityController {
 		};
 	}
 	
-	
+	/**
+	 * Get the entity that this controller is responsible for.
+	 * @return Entity
+	 */
 	public Entity getEntity() {
 		return this.entity;
 	}
