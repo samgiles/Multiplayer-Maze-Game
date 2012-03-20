@@ -9,29 +9,21 @@ public abstract class MovementListener {
 	/**
 	 * Invoked when the Game control for Up is triggered.
 	 */
-	public void onMoveUp(){
-		// Called when a MovementHandler triggers a move Up.
-	}
+	public abstract void onMoveUp();
 	
 	/**
 	 * Invoked when the Game control for down is triggered.
 	 */
-	public void onMoveDown(){
-		// Called when a MovementHandler triggers a move Down.
-	}
+	public abstract void onMoveDown();
 	
 	/**
 	 * Invoked when the Game control for left is triggered.
 	 */
-	public void onMoveLeft(){
-		// Called when a MovementHandler triggers a move Up.
-	}
+	public abstract void onMoveLeft();
 	
 	/**
 	 * Invoked when the Game control for right is triggered.
 	 */
-	public void onMoveRight(){
-		// Called when a MovementHandler triggers a move Down.
-	}
+	public abstract void onMoveRight();
 	
 }
