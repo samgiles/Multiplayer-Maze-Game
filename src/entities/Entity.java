@@ -25,8 +25,32 @@ public class Entity {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the Y position of this entity.
+	 * @return double The Y position of the entity.
+	 */
+	public double getPositionY() {
+		return this.positionY;
+	}
+	
+	/**
+	 * Adds a value on to the current Y position of the entity.
+	 * @param value double A signed value that will be added to the Y position, so a negative number will decrease Y and a positive value will increase Y
+	 */
+	public void addToPositionY(double value) {
+		this.positionY += value;
+	}
+	
+	/**
+	 * Sets the X position of the entity.
+	 * @param value The X position to set this entity to.
+	 */
+	public void setPositionY(double value) {
+		this.positionY = value;
+	}
+	
+	/**
+	 * Gets the X position of this entity.
+	 * @return double The X position of the entity.
 	 */
 	public double getPositionX() {
 		return this.positionX;
@@ -42,7 +66,7 @@ public class Entity {
 	
 	/**
 	 * Sets the X position of the entity.
-	 * @param value
+	 * @param value The X position to set this entity to.
 	 */
 	public void setPositionX(double value) {
 		this.positionX = value;

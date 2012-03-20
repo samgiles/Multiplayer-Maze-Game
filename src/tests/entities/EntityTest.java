@@ -39,6 +39,32 @@ public class EntityTest {
 	}
 	
 	@Test
+	public void testGetSetPositionY() {
+		Random rand = new Random();
+		
+		// Run this with 4 different random numbers:
+		int i = 5;
+		
+		while (--i != 0) {
+			double randomTestNumber = rand.nextDouble();
+			testEntity.setPositionY(randomTestNumber);
+			assertTrue("Test the position was set correctly to the random test number: " + String.valueOf(randomTestNumber), testEntity.getPositionY() == randomTestNumber);
+		}
+	}
+	
+	
+	@Test
+	public void testAddToPositionY() {
+		// Make sure initial X value is 0.
+		testEntity.setPositionY(0);
+		// Add 100, then test if new score is 100.
+		testEntity.addToPositionY(100);
+		assertTrue("Check Test entity's value increased from 0 to 100", testEntity.getPositionY() == 100);
+		testEntity.addToPositionY(-200);
+		assertTrue("Check Test entity's value decreased from 100 to -100", testEntity.getPositionY() == -100);
+	}
+	
+	@Test
 	public void testGetSetPositionX() {
 		Random rand = new Random();
 		
@@ -56,7 +82,7 @@ public class EntityTest {
 	@Test
 	public void testAddToPositionX() {
 		// Make sure initial X value is 0.
-		testEntity.setScore(0);
+		testEntity.setPositionX(0);
 		// Add 100, then test if new score is 100.
 		testEntity.addToPositionX(100);
 		assertTrue("Check Test entity's value increased from 0 to 100", testEntity.getPositionX() == 100);
