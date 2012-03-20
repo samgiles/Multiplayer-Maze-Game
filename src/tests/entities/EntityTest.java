@@ -4,8 +4,11 @@
 package tests.entities;
 
 
+import static org.junit.Assert.*;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Test case for the Entity
@@ -25,6 +28,11 @@ public class EntityTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+	}
+	
+	@Test
+	public void testConstructor() {
+		fail("Not implemented");
 	}
 
 }
