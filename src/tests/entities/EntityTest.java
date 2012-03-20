@@ -14,6 +14,8 @@ import org.junit.Test;
 
 import entities.Entity;
 
+import entities.Entity;
+
 /**
  * Test case for the Entity
  * @author Samuel Giles

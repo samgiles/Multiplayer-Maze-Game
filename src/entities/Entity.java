@@ -11,7 +11,7 @@ public class Entity {
 	 * The current X position of the entity.
 	 */
 	private double positionX;
-	
+
 	/**
 	 * The current Y position of the entity.
 	 */
@@ -73,6 +73,8 @@ public class Entity {
 	}
 	
 	/**
+=======
+>>>>>>> branch 'master' of git@github.com:aPhRo/Multiplayer-Maze-Game.git
 	 * Get the current score for this entity.
 	 * @return int The entities score.
 	 */

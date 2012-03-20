@@ -6,7 +6,8 @@ package entities;
 import store.IDataSource;
 
 /**
- * @author 1021372
+ * Loads a player from a datasource.
+ * @author Samuel Giles
  *
  */
 public class PlayerDataSource implements IDataSource<Entity> {
