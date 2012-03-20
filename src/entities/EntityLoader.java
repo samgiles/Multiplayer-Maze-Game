@@ -8,10 +8,11 @@ import store.IDataSource;
  *
  */
 public class EntityLoader {
+	
 	/**
 	 * The data source this entity loader will use to load the entites from.
 	 */
-	private IDataSource<Entity> dataSource;
+	private final IDataSource<Entity> dataSource;
 	
 	public EntityLoader(IDataSource<Entity> entityDataSource) {
 		this.dataSource = entityDataSource;
