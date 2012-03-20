@@ -11,7 +11,7 @@
 	   </path>
 	   
 	   <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
-	   
+	
 	   <target name="init">
 			<mkdir dir="bin" />
 			<mkdir dir="coverage" />
@@ -19,7 +19,7 @@
 	   </target>
 	   
 	   <target name="compile" depends="init">
-			<javac srcdir="src" destdir="bin" debug="true">
+			<javac srcdir="src" destdir="bin" debug="true" includeantruntime="false">
 				<classpath refid="cobertura.classpath" />
 	   		</javac>
 	   </target>
@@ -41,9 +41,9 @@
 				<classpath location="coverage" />
 				<classpath location="bin" />
 				<classpath refid="cobertura.classpath" />
+				<classpath location="${java.class.path}" />
 				<formatter type="xml" />
-				<test name="${testcase}" todir="" if="testcase" />
-				<batchtest todir="${basedir}/build/junit" unless="testcase" haltonfailure="no">
+				<batchtest todir="${basedir}/build/junit" haltonfailure="no">
 					<fileset dir="src">
 						<include name="**/*Test.java" />
 					</fileset>
