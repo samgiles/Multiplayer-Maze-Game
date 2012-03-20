@@ -9,7 +9,7 @@
   <rule ref="rulesets/java/braces.xml"/>
   <rule ref="rulesets/java/coupling.xml"/>
   <rule
-   ref="rulesets/basic.xml/EmptyCatchBlock"
+   ref="rulesets/java/empty.xml/EmptyCatchBlock"
    message="Must handle exceptions">
      <priority>2</priority>
   </rule>
