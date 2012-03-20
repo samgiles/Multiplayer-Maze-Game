@@ -21,6 +21,7 @@
 	   <target name="compile" depends="init">
 			<javac srcdir="src" destdir="bin" debug="true" includeantruntime="false">
 				<classpath refid="cobertura.classpath" />
+				<classpath location="${basedir}/build/libs" />
 	   		</javac>
 	   </target>
 	   
