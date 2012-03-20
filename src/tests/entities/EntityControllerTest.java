@@ -2,7 +2,11 @@ package tests.entities;
 
 import static org.junit.Assert.*;
 
+import java.util.Random;
+
 import org.junit.*;
+
+import tests.entities.mockobjects.MockMoveHandler;
 
 import entities.*;
 
@@ -12,11 +16,17 @@ import entities.*;
  */
 public class EntityControllerTest {
 
+	private MockMoveHandler moveHandler = new MockMoveHandler();
+	private Entity testEntity;
+	private EntityController entityController;
+	
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		testEntity = new Entity();
+		entityController = new EntityController(testEntity, moveHandler);
 	}
 
 	/**
@@ -32,10 +42,93 @@ public class EntityControllerTest {
 	 */
 	@Test
 	public void testEntityController() {
-		Entity testEntity = new Entity();
-		EntityController entityController = new EntityController(testEntity);
 		// Test that the entity is the same as the entity passed to the constructor.
 		assertTrue(testEntity == entityController.getEntity());
 	}
+	
+	/**
+	 * Tests the controller movement handling.
+	 */
+	@Test
+	public void testMoveUpHandled() {
+		// Set the position to (0,0)
+		testEntity.setPositionX(0);
+		testEntity.setPositionY(0);
+		
+		// trigger the UP movement a random n  times, this should move the entity to (0,-(EntityController.MOVECONSTANT * n)) position
+		Random rand = new Random();
+		int n = (rand.nextInt(25) + 10) << 1; // Max of 50 min of 20
+		int i = n;
+		while(i-- > 0) {
+			moveHandler.triggerUp();
+		}
+		
+		// the controller should have heard those movements, and translated it to the entity.
+		assertTrue(testEntity.getPositionY() == -(n * EntityController.MOVE_CONSTANT));
+	}
+	
+	/**
+	 * Tests the controller movement handling.
+	 */
+	@Test
+	public void testMoveDownHandled() {
+		// Set the position to (0,0)
+		testEntity.setPositionX(0);
+		testEntity.setPositionY(0);
+		
+		// trigger the DOWN movement a random n  times, this should move the entity to (0,(EntityController.MOVECONSTANT * n)) position
+		Random rand = new Random();
+		int n = (rand.nextInt(25) + 1) << 1; // Max of 50 min of 2
+		int i = n;
+		while(i-- > 0) {
+			moveHandler.triggerDown();
+		}
+		
+		// the controller should have heard those movements, and translated it to the entity.
+		assertTrue(testEntity.getPositionY() == (n * EntityController.MOVE_CONSTANT));
+	}
+	
+	/**
+	 * Tests the controller movement handling.
+	 */
+	@Test
+	public void testMoveLeftHandled() {
+		// Set the position to (0,0)
+		testEntity.setPositionX(0);
+		testEntity.setPositionY(0);
+		
+		// trigger the left movement a random n  times, this should move the entity to (-(EntityController.MOVECONSTANT * n), 0) position
+		Random rand = new Random();
+		int n = (rand.nextInt(25) + 1) << 1; // Max of 50 min of 2
+		int i = n;
+		while(i-- > 0) {
+			moveHandler.triggerLeft();
+		}
+		
+		// the controller should have heard those movements, and translated it to the entity.
+		assertTrue(testEntity.getPositionX() == -(n * EntityController.MOVE_CONSTANT));
+	}
+	
+	/**
+	 * Tests the controller movement handling.
+	 */
+	@Test
+	public void testMoveRightHandled() {
+		// Set the position to (0,0)
+		testEntity.setPositionX(0);
+		testEntity.setPositionY(0);
+		
+		// trigger the right movement a random n  times, this should move the entity to ((EntityController.MOVECONSTANT * n), 0) position
+		Random rand = new Random();
+		int n = (rand.nextInt(25) + 1) << 1; // Max of 50 min of 2
+		int i = n;
+		while(i-- > 0) {
+			moveHandler.triggerRight();
+		}
+		
+		// the controller should have heard those movements, and translated it to the entity.
+		assertTrue(testEntity.getPositionX() == (n * EntityController.MOVE_CONSTANT));
+	}
+	
 
 }
