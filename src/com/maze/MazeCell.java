@@ -3,7 +3,7 @@
  */
 package com.maze;
 
-import uk.ac.wlv.mazegenerator.Cell;
+import wlv.mazegenerator.Cell;
 
 import com.MoveDirection;
 

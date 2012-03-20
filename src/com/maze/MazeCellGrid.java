@@ -1,6 +1,6 @@
 package com.maze;
 
-import uk.ac.wlv.mazegenerator.CellGrid;
+import wlv.mazegenerator.CellGrid;
 
 class MazeCellGrid implements IMazeGrid {
 

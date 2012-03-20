@@ -1,7 +1,8 @@
 package com.maze;
 
-import uk.ac.wlv.mazegenerator.CellGrid;
-import uk.ac.wlv.mazegenerator.MazeGenerator;
+import wlv.mazegenerator.CellGrid;
+import wlv.mazegenerator.MazeGenerator;
+
 
 class SimpleMazeGenerator implements IMazeGenerator {
 	
