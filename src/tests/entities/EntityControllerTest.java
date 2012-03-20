@@ -27,6 +27,8 @@ public class EntityControllerTest {
 	public void setUp() throws Exception {
 		testEntity = new Entity();
 		entityController = new EntityController(testEntity, moveHandler);
+		testEntity.setPositionX(0);
+		testEntity.setPositionY(0);
 	}
 
 	/**
@@ -56,8 +58,7 @@ public class EntityControllerTest {
 		testEntity.setPositionY(0);
 		
 		// trigger the UP movement a random n  times, this should move the entity to (0,-(EntityController.MOVECONSTANT * n)) position
-		Random rand = new Random();
-		int n = (rand.nextInt(25) + 10) << 1; // Max of 50 min of 20
+		int n = getRandomNumber();
 		int i = n;
 		while(i-- > 0) {
 			moveHandler.triggerUp();
@@ -72,13 +73,9 @@ public class EntityControllerTest {
 	 */
 	@Test
 	public void testMoveDownHandled() {
-		// Set the position to (0,0)
-		testEntity.setPositionX(0);
-		testEntity.setPositionY(0);
 		
 		// trigger the DOWN movement a random n  times, this should move the entity to (0,(EntityController.MOVECONSTANT * n)) position
-		Random rand = new Random();
-		int n = (rand.nextInt(25) + 1) << 1; // Max of 50 min of 2
+		int n = getRandomNumber();
 		int i = n;
 		while(i-- > 0) {
 			moveHandler.triggerDown();
@@ -93,13 +90,8 @@ public class EntityControllerTest {
 	 */
 	@Test
 	public void testMoveLeftHandled() {
-		// Set the position to (0,0)
-		testEntity.setPositionX(0);
-		testEntity.setPositionY(0);
-		
 		// trigger the left movement a random n  times, this should move the entity to (-(EntityController.MOVECONSTANT * n), 0) position
-		Random rand = new Random();
-		int n = (rand.nextInt(25) + 1) << 1; // Max of 50 min of 2
+		int n = getRandomNumber();
 		int i = n;
 		while(i-- > 0) {
 			moveHandler.triggerLeft();
@@ -114,13 +106,9 @@ public class EntityControllerTest {
 	 */
 	@Test
 	public void testMoveRightHandled() {
-		// Set the position to (0,0)
-		testEntity.setPositionX(0);
-		testEntity.setPositionY(0);
 		
 		// trigger the right movement a random n  times, this should move the entity to ((EntityController.MOVECONSTANT * n), 0) position
-		Random rand = new Random();
-		int n = (rand.nextInt(25) + 1) << 1; // Max of 50 min of 2
+		int n = getRandomNumber();
 		int i = n;
 		while(i-- > 0) {
 			moveHandler.triggerRight();
@@ -130,5 +118,9 @@ public class EntityControllerTest {
 		assertTrue(testEntity.getPositionX() == (n * EntityController.MOVE_CONSTANT));
 	}
 	
+	private int getRandomNumber() {
+		Random rand = new Random();
+		return (rand.nextInt(25) + 1) << 1; // Max of 50 min of 2
+	}
 
 }
