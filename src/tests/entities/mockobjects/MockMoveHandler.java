@@ -4,7 +4,6 @@
 package tests.entities.mockobjects;
 
 import com.MoveDirection;
-
 import entities.MoveHandler;
 
 /**
@@ -18,22 +17,22 @@ public class MockMoveHandler extends MoveHandler {
 	}
 	
 	public void triggerUp() {
-		this.notify(MoveDirection.UP);
+		notify(MoveDirection.UP);
 	}
 	
 	public void triggerDown() {
-		this.notify(MoveDirection.DOWN);
+		notify(MoveDirection.DOWN);
 	}
 	
 	public void triggerLeft() {
-		this.notify(MoveDirection.LEFT);
+		notify(MoveDirection.LEFT);
 	}
 	
 	public void triggerRight() {
-		this.notify(MoveDirection.RIGHT);
+		notify(MoveDirection.RIGHT);
 	}
 	
 	public void triggerIllegalArgument() {
-		this.notify(MoveDirection.valueOf("Invalid"));
+		notify(MoveDirection.valueOf("Invalid"));
 	}
 }
