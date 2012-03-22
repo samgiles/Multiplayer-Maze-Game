@@ -51,7 +51,7 @@ public class MazeFactoryTest {
 	@Test
 	public void testFileGeneration() {
 		IMazeGrid grid = MazeFactory.simpleGrid(mazeFileName, 10, 10);
-		assertTrue(mazeFileExists());
+		assertTrue("The test file does not exist even after is has been created.", mazeFileExists());
 		deleteMazeFile();
 	}
 	
@@ -60,7 +60,7 @@ public class MazeFactoryTest {
 		IMazeGrid grid = MazeFactory.simpleGrid(mazeFileName, 200, 100);
 		IMazeCell cell = grid.getMazeCell(0, 0);
 		// Should be able to assert that the cell is an IMazeCell;
-		assertTrue(cell instanceof IMazeCell);
+		assertTrue("The returned value was not of instance IMazeCell", cell instanceof IMazeCell);
 	}
 	
 	private boolean mazeFileExists() {
