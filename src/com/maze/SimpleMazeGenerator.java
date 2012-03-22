@@ -6,7 +6,7 @@ import wlv.mazegenerator.MazeGenerator;
 
 class SimpleMazeGenerator implements IMazeGenerator {
 	
-	private MazeGenerator mazeGenerator;
+	private final MazeGenerator mazeGenerator;
 	
 	public SimpleMazeGenerator() {
 		mazeGenerator = new MazeGenerator();

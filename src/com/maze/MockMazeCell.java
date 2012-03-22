@@ -11,7 +11,7 @@ import com.MoveDirection;
  */
 public class MockMazeCell implements IMazeCell {
 
-	private MazeCell mazeCell;
+	private final MazeCell mazeCell;
 	
 	public MockMazeCell(boolean north, boolean east, boolean south, boolean west) {
 		mazeCell = new MazeCell(new Cell(north, south, east, west, 0));
