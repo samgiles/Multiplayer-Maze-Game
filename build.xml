@@ -2,11 +2,10 @@
 <project name="MazeGame Ant Build" default="build" basedir=".">
 	   
 	   <property environment="ENV"/> 
-	   
+	
 	   <path id="cobertura.classpath">
 			<fileset dir="/home/sam/cobertura">
 				<include name="cobertura.jar" />
-				<include name="lib/**/*.jar" />
 			</fileset>
 	   </path>
 	   
@@ -20,6 +19,12 @@
 	   
 	   <target name="compile" depends="init">
 			<javac srcdir="src" destdir="bin" debug="true" includeantruntime="false">
+				<src path="${basedir}/src/com"/>
+				<src path="${basedir}/src/entities"/>
+				<src path="${basedir}/src/maze"/>
+				<src path="${basedir}/src/tests"/>
+				<src path="${basedir}/src/"/>
+				<include name="**/*.java"/>
 				<classpath refid="cobertura.classpath" />
 				<classpath location="${basedir}/build/libs" />
 	   		</javac>
@@ -41,8 +46,12 @@
 			<junit fork="yes" dir="${basedir}" failureProperty="test.failed">
 				<classpath location="coverage" />
 				<classpath location="bin" />
-				<classpath refid="cobertura.classpath" />
-				<classpath location="${java.class.path}" />
+				<classpath>
+					<path refid="cobertura.classpath" />
+				    <fileset dir="${junit.dir}">
+				    	<include name="**/*.jar" />
+				    </fileset>
+				</classpath>
 				<formatter type="xml" />
 				<batchtest todir="${basedir}/build/junit" haltonfailure="no">
 					<fileset dir="src">
