@@ -4,14 +4,15 @@
 package com.maze;
 
 import wlv.mazegenerator.Cell;
-
 import com.MoveDirection;
 
 /**
+ * Represents a MazeCell, this class is internal to the com.maze package, this facades the Cell implementation and transforms it into a IMazeCell interface.  You can only use it via it's interface IMazeCell
+ * @see com.maze.IMazeCell
  * @author Samuel Giles
- *
+ * @version 0.1
  */
-public class MazeCell implements IMazeCell {
+class MazeCell implements IMazeCell {
 
 	private Cell cell;
 	

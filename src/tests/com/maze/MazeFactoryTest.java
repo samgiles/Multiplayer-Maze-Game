@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.maze.IMazeCell;
 import com.maze.IMazeGrid;
 import com.maze.MazeFactory;
 
@@ -52,6 +53,14 @@ public class MazeFactoryTest {
 		IMazeGrid grid = MazeFactory.simpleGrid(mazeFileName, 10, 10);
 		assertTrue(mazeFileExists());
 		deleteMazeFile();
+	}
+	
+	@Test
+	public void testMazeGridCreation() {
+		IMazeGrid grid = MazeFactory.simpleGrid(mazeFileName, 200, 100);
+		IMazeCell cell = grid.getMazeCell(0, 0);
+		// Should be able to assert that the cell is an IMazeCell;
+		assertTrue(cell instanceof IMazeCell);
 	}
 	
 	private boolean mazeFileExists() {

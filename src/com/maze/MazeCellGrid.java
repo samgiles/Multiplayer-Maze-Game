@@ -2,6 +2,11 @@ package com.maze;
 
 import wlv.mazegenerator.CellGrid;
 
+/**
+ * An implementation of an IMazeGrid that facades the wlv version of CellGrid.  This is internal and can only be used via it's interface.
+ * @author Samuel Giles
+ * @version 0.1
+ */
 class MazeCellGrid implements IMazeGrid {
 
 	/**
