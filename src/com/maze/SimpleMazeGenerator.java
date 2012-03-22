@@ -20,9 +20,9 @@ class SimpleMazeGenerator implements IMazeGenerator {
 	 * @return IMazeGrid The maze grid.
 	 */
 	@Override
-	public IMazeGrid generateMaze(String filename, int width, int height) {
+	public IMaze generateMaze(String filename, int width, int height) {
 		CellGrid grid = mazeGenerator.generateMaze(filename, width, height);
-		return new MazeCellGrid(grid);
+		return new Maze(grid);
 	}
 	
 }

@@ -10,5 +10,5 @@ interface IMazeGenerator {
 	 * @param height int The height of the IMazeGrid
 	 * @return IMazeGrid The maze grid.
 	 */
-	public IMazeGrid generateMaze(String filename, int width, int height);
+	public IMaze generateMaze(String filename, int width, int height);
 }
