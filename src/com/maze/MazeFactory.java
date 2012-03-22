@@ -9,6 +9,7 @@ package com.maze;
  */
 public final class MazeFactory {
 
+	private static Object lock = new Object();
 	
 	private static MazeFactory factory = null;
 	
@@ -18,9 +19,12 @@ public final class MazeFactory {
 		this.generator = generator;
 	}
 	
-	public synchronized static IMazeGrid newSimpleGrid(String saveTo, int width, int height) {
-		if (MazeFactory.factory == null){
-			MazeFactory.factory = new MazeFactory(new SimpleMazeGenerator());
+	public static IMazeGrid newSimpleGrid(String saveTo, int width, int height) {
+		
+		synchronized(lock) {
+			if (MazeFactory.factory == null){
+				MazeFactory.factory = new MazeFactory(new SimpleMazeGenerator());
+			}
 		}
 		
 		return factory.generator.generateMaze(saveTo, width, height);
