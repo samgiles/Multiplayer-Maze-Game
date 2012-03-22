@@ -3,13 +3,14 @@
 	   
 	   <property environment="ENV"/> 
 	
-	   <path id="cobertura.classpath">
-			<fileset dir="/home/sam/cobertura">
-				<include name="cobertura.jar" />
-			</fileset>
-	   </path>
-	   
-	   <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
+	      <path id="cobertura.classpath">
+				<fileset dir="/home/sam/cobertura">
+					<include name="cobertura.jar" />
+					<include name="lib/**/*.jar" />
+				</fileset>
+		   </path>
+
+		   <taskdef classpathref="cobertura.classpath" resource="tasks.properties"/>
 	
 	   <target name="init">
 			<mkdir dir="bin" />
@@ -17,17 +18,11 @@
 			<mkdir dir="build/logs" />
 	   </target>
 	   
-	   <target name="compile" depends="init">
-			<javac srcdir="src" destdir="bin" debug="true" includeantruntime="false">
-				<src path="${basedir}/src/com"/>
-				<src path="${basedir}/src/entities"/>
-				<src path="${basedir}/src/maze"/>
-				<src path="${basedir}/src/"/>
-				<include name="**/*.java"/>
-				<classpath refid="cobertura.classpath" />
-				<classpath location="${basedir}/build/libs" />
-	   		</javac>
-	   </target>
+	     <target name="compile" depends="init">
+				<javac srcdir="src" destdir="bin" debug="true" includeantruntime="false">
+					<classpath refid="cobertura.classpath" />
+		   		</javac>
+		   </target>
 	   
 	   <target name="instrument" depends="init,compile">
 			<delete file="cobertura.ser"/>
@@ -42,24 +37,20 @@
 		</target>
 		
 		<target name="test" depends="init,compile">
-			<junit fork="yes" dir="${basedir}" failureProperty="test.failed">
-				<classpath location="coverage" />
-				<classpath location="bin" />
-				<classpath>
-					<path refid="cobertura.classpath" />
-				    <fileset dir="${junit.dir}">
-				    	<include name="**/*.jar" />
-				    </fileset>
-				</classpath>
-				<formatter type="xml" />
-				<batchtest todir="${basedir}/build/junit" haltonfailure="no">
-					<fileset dir="src">
-						<include name="**/*Test.java" />
-					</fileset>
-					<formatter type="xml"/>
-				</batchtest>
-			</junit>
-		</target>
+				<junit fork="yes" dir="${basedir}" failureProperty="test.failed">
+					<classpath location="coverage" />
+					<classpath location="bin" />
+					<classpath refid="cobertura.classpath" />
+					<classpath location="${java.class.path}" />
+					<formatter type="xml" />
+					<batchtest todir="${basedir}/build/junit" haltonfailure="no">
+						<fileset dir="src/tests">
+							<include name="**/*Test.java" />
+						</fileset>
+						<formatter type="xml"/>
+					</batchtest>
+				</junit>
+			</target>
 		
 		<target name="coverage-check">
 			<cobertura-check branchrate="34" totallinerate="100" />
