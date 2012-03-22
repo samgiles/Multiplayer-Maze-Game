@@ -41,7 +41,7 @@ public class MazeFactoryTest {
 		
 		// This simply doesn't do as expected due to something in WLV's implementation...
 		
-		IMazeGrid grid = MazeFactory.simpleGrid(mazeFileName, 200, 100);
+		IMazeGrid grid = MazeFactory.newSimpleGrid(mazeFileName, 200, 100);
 		int x = grid.getSizeX();
 		int y = grid.getSizeY();
 		assertTrue("The X size of the grid was " + String.valueOf(x) + ", should have been 200", x == 200);
@@ -50,14 +50,14 @@ public class MazeFactoryTest {
 
 	@Test
 	public void testFileGeneration() {
-		IMazeGrid grid = MazeFactory.simpleGrid(mazeFileName, 10, 10);
+		IMazeGrid grid = MazeFactory.newSimpleGrid(mazeFileName, 10, 10);
 		assertTrue("The test file does not exist even after is has been created.", mazeFileExists());
 		deleteMazeFile();
 	}
 	
 	@Test
 	public void testMazeGridCreation() {
-		IMazeGrid grid = MazeFactory.simpleGrid(mazeFileName, 200, 100);
+		IMazeGrid grid = MazeFactory.newSimpleGrid(mazeFileName, 200, 100);
 		IMazeCell cell = grid.getMazeCell(0, 0);
 		// Should be able to assert that the cell is an IMazeCell;
 		assertTrue("The returned value was not of instance IMazeCell", cell instanceof IMazeCell);
