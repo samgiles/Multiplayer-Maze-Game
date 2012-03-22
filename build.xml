@@ -16,9 +16,10 @@
 			<mkdir dir="bin" />
 			<mkdir dir="coverage" />
 			<mkdir dir="build/logs" />
+	   		<mkdir dir="build/junit" />
 	   </target>
 	   
-	     <target name="compile" depends="init">
+	<target name="compile" depends="init">
 				<javac srcdir="src" destdir="bin" debug="true" includeantruntime="false">
 					<classpath refid="cobertura.classpath" />
 		   		</javac>
@@ -37,20 +38,21 @@
 		</target>
 		
 		<target name="test" depends="init,compile">
-				<junit fork="yes" dir="${basedir}" failureProperty="test.failed">
-					<classpath location="coverage" />
-					<classpath location="bin" />
-					<classpath refid="cobertura.classpath" />
-					<classpath location="${java.class.path}" />
-					<formatter type="xml" />
-					<batchtest todir="${basedir}/build/junit" haltonfailure="no">
-						<fileset dir="src/tests">
-							<include name="**/*Test.java" />
-						</fileset>
-						<formatter type="xml"/>
-					</batchtest>
-				</junit>
-			</target>
+			<junit fork="yes" dir="${basedir}" failureProperty="test.failed">
+				<classpath location="coverage" />
+				<classpath location="bin" />
+				<classpath>
+					<path refid="cobertura.classpath" />
+				</classpath>
+				<formatter type="xml" />
+				<batchtest todir="${basedir}/build/junit" haltonfailure="no">
+					<fileset dir="src">
+						<include name="**/*Test.java" />
+					</fileset>
+					<formatter type="xml"/>
+				</batchtest>
+			</junit>
+		</target>
 		
 		<target name="coverage-check">
 			<cobertura-check branchrate="34" totallinerate="100" />
