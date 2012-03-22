@@ -7,7 +7,7 @@ package com.maze;
  * @author sam
  *
  */
-public class MazeFactory {
+public final class MazeFactory {
 
 	
 	private static MazeFactory factory = null;
