@@ -22,7 +22,6 @@
 				<src path="${basedir}/src/com"/>
 				<src path="${basedir}/src/entities"/>
 				<src path="${basedir}/src/maze"/>
-				<src path="${basedir}/src/tests"/>
 				<src path="${basedir}/src/"/>
 				<include name="**/*.java"/>
 				<classpath refid="cobertura.classpath" />
