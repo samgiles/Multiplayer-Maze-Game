@@ -14,7 +14,7 @@ import com.MoveDirection;
  */
 class MazeCell implements IMazeCell {
 
-	private Cell cell;
+	private final Cell cell;
 	
 	public MazeCell(Cell cell) {
 		this.cell = cell;

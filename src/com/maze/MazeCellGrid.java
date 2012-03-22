@@ -12,7 +12,7 @@ class MazeCellGrid implements IMazeGrid {
 	/**
 	 * The underlying wlv.mazegenerator.CellGrid
 	 */
-	private CellGrid grid;
+	private final CellGrid grid;
 	
 	/**
 	 * Creates a new MazeCellGrid using the wlv.mazegenerator.CellGrid as it's underlying representation.
