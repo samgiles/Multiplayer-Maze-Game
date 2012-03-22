@@ -11,7 +11,7 @@ public class MazeFactory {
 
 	private static IMazeGenerator generator = null;
 	
-	public static IMazeGrid simpleGrid(String saveTo, int width, int height) {
+	public synchronized static IMazeGrid simpleGrid(String saveTo, int width, int height) {
 		if (generator == null){
 			generator = new SimpleMazeGenerator();
 		}
