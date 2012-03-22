@@ -5,5 +5,5 @@ package com;
  * @author Samuel Giles
  */
 public enum MoveDirection {
-	UP, DOWN, LEFT, RIGHT, NONE;
+	UP, DOWN, LEFT, RIGHT;
 }

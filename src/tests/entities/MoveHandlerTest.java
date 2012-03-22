@@ -63,10 +63,5 @@ public class MoveHandlerTest {
 		moveHandler.triggerRight();
 		assertTrue("Re Test the right listen handler", mockListener.getFlags() == 0x00000F);
 	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testIllegalMoveNotification() {
-		moveHandler.triggerIllegalArgument();
-	}
 
 }

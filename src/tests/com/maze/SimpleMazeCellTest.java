@@ -33,10 +33,4 @@ public class SimpleMazeCellTest {
 		assertTrue("The cell was created with a western wall, however the west wall was flagged as a non wall.", mazeCell.isWall(com.MoveDirection.LEFT));
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidDirection() {
-		IMazeCell mazeCell = new MockMazeCell(false, false, false, true);
-		mazeCell.isWall(com.MoveDirection.valueOf("Invalid")); // Should trigger an exception	
-	}
-	
 }

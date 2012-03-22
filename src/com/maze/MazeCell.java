@@ -25,18 +25,23 @@ class MazeCell implements IMazeCell {
 	 */
 	@Override
 	public boolean isWall(MoveDirection direction) {
+		boolean result = false;
+		
 		switch(direction) {
 			case UP:
-				return cell.isWallN();
+				result = cell.isWallN();
+				break;
 			case DOWN:
-				return cell.isWallS();
+				result = cell.isWallS();
+				break;
 			case LEFT:
-				return cell.isWallW();
+				result = cell.isWallW();
+				break;
 			case RIGHT:
-				return cell.isWallE();
-			default:
-				throw new IllegalArgumentException("Invalid direction given: " + direction.toString());
+				result = cell.isWallE();
 		}
+		
+		return result;
 	}
 
 }

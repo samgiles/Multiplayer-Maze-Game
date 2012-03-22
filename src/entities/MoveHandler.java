@@ -47,9 +47,6 @@ public abstract class MoveHandler {
 					break;
 				case RIGHT:
 					listener.onMoveRight();
-					break;
-				default:
-					throw new IllegalArgumentException("The argument, direction, was not a valid MoveDirection argument.");
 			}
 		}
 	}
