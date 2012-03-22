@@ -55,6 +55,18 @@ public class SimpleMazeFactoryTest {
 		deleteMazeFile();
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testMazeGridInterfaceGetCellX() {
+		IMazeGrid grid = MazeFactory.newSimpleGrid(mazeFileName, 10, 10);
+		grid.getMazeCell(-100, 10);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testMazeGridInterfaceGetCellY() {
+		IMazeGrid grid = MazeFactory.newSimpleGrid(mazeFileName, 10, 10);
+		grid.getMazeCell(10, -100);
+	}
+	
 	@Test
 	public void testMazeGridCreation() {
 		IMazeGrid grid = MazeFactory.newSimpleGrid(mazeFileName, 200, 100);
