@@ -39,7 +39,7 @@ public class CellGrid {
 		exit = new CellRef(0, col - 1, 'S');
 	}
 
-	public void createNewGrid() {
+	public final void createNewGrid() {
 		grid = new Cell[row][col];
 		for (int r = 0; r < row; r++) {
 			for (int c = 0; c < col; c++) {
