@@ -28,7 +28,7 @@ public abstract class MoveHandler {
 	 * Notifies listeners about a game movement event.
 	 * @param direction MoveDirection The direction that the handler is notfying listeners about.
 	 */
-	protected void notify(MoveDirection direction) {
+	protected void notify(com.MoveDirection direction) {
 		
 		Iterator<MovementListener> it = listeners.iterator();
 		
