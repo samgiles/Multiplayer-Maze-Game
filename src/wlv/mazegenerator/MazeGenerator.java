@@ -21,6 +21,8 @@ import java.util.Stack;
 
 import javax.imageio.ImageIO;
 
+import com.graphics.AWTGraphicsContext;
+
 public class MazeGenerator {
 
 	private static final int DEFAULT_HEIGHT = 800;
@@ -224,7 +226,10 @@ public class MazeGenerator {
 		BufferedImage image = new BufferedImage(size.width, size.height,
 				BufferedImage.TYPE_INT_RGB);
 		Graphics g = image.getGraphics();
-		grid.draw2D(g);
+		
+		AWTGraphicsContext graphics = new AWTGraphicsContext(g);
+		
+		grid.draw2D(graphics);
 		return image;
 	}
 

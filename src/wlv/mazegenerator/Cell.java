@@ -7,6 +7,8 @@ package wlv.mazegenerator;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import com.graphics.IGraphicsContext;
+
 public class Cell {
 	private boolean wallN;
 	private boolean wallS;
@@ -139,7 +141,7 @@ public class Cell {
 		}
 	}
 
-	private void doDraw(Graphics g, int size, int x, int y) {
+	private void doDraw(IGraphicsContext g, int size, int x, int y) {
 		if (wallS) {
 			g.drawLine(x, y + size, x + size, y + size);
 			g.drawLine(x, y + size - 1, x + size, y + size - 1);
@@ -158,12 +160,12 @@ public class Cell {
 		}
 	}
 	
-	public void draw2D(Graphics g, int size, int x, int y) {
-		g.setColor(new Color(0, 200, 0));
+	public void draw2D(IGraphicsContext g, int size, int x, int y) {
+		g.setColor(0, 200, 0);
 		doDraw(g, size, x, y);
 	}
 
-	public void draw(Graphics g, int size, int x, int y) {
+	public void draw(IGraphicsContext g, int size, int x, int y) {
 		doDraw(g, size, x, y);
 		String numStr = "" + number;
 		char[] data = numStr.toCharArray();

@@ -26,6 +26,8 @@ import javax.swing.KeyStroke;
 import javax.swing.WindowConstants;
 import javax.swing.JFrame;
 
+import com.graphics.AWTGraphicsContext;
+
 @SuppressWarnings("serial")
 public class TestMazeGenerator extends javax.swing.JPanel {
 
@@ -137,13 +139,13 @@ public class TestMazeGenerator extends javax.swing.JPanel {
 	@Override
 	public void update(Graphics g) {
 		super.update(g);
-		grid.draw2D(g);
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		grid.draw2D(g);
+		AWTGraphicsContext graphics = new AWTGraphicsContext(g);
+		grid.draw2D(graphics);
 	}
 
 	public void updateGrid(CellGrid grid) {

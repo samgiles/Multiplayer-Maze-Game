@@ -8,6 +8,8 @@ import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import com.graphics.IGraphicsContext;
+
 public class CellGrid {
 
 	private final int SIZE = 30;
@@ -56,11 +58,11 @@ public class CellGrid {
 		}
 	}
 
-	public void draw2D(Graphics g) {
-		Color old = g.getColor();
-		g.setColor(new Color(0, 0, 0));
+	public void draw2D(IGraphicsContext g) {
+		Color old = new Color(g.getColor());
+		g.setColor(0, 0, 0);
 		g.fillRect(0, 0, col * SIZE + 10, row * SIZE + 10);
-		g.setColor(old);
+		g.setColor(old.getRed(), old.getGreen(), old.getBlue());
 		int x = 0;
 		int y = SIZE * (row - 1);
 		for (int r = 0; r < row; r++) {
@@ -71,11 +73,11 @@ public class CellGrid {
 		// Now plot current cell
 		int cx = SIZE * currentCell.getCol() + 10;
 		int cy = y - (SIZE * currentCell.getRow()) + 10;
-		g.setColor(new Color(255, 0, 0));
+		g.setColor(255, 0, 0);
 		g.fillOval(cx, cy, 10, 10);
 	}
 
-	public void draw(Graphics g) {
+	public void draw(IGraphicsContext g) {
 		int x = SIZE;
 		int y = SIZE * row;
 		for (int r = 0; r < row; r++) {
