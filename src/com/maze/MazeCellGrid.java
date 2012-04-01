@@ -1,6 +1,8 @@
 package com.maze;
 
+import wlv.mazegenerator.Cell;
 import wlv.mazegenerator.CellGrid;
+import wlv.mazegenerator.CellRef;
 
 /**
  * An implementation of an IMazeGrid that facades the wlv version of CellGrid.  This is internal and can only be used via it's interface.
@@ -58,6 +60,18 @@ class MazeCellGrid implements IMazeGrid {
 		}
 		
 		return new MazeCell(grid.getGrid()[x][y]);
+	}
+
+	@Override
+	public IMazeCell getStartCell() {
+		CellRef ref = this.grid.getStart();
+		return getMazeCell(ref.getRow(), ref.getCol());
+	}
+	
+	@Override
+	public IMazeCell getEndCell() {
+		CellRef ref = this.grid.getExit();
+		return getMazeCell(ref.getRow(), ref.getCol());
 	}
 
 }

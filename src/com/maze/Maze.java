@@ -11,7 +11,7 @@ import com.graphics.IGraphicsContext;
  * Represents a maze.
  * @author Samuel Giles
  */
-class Maze extends MazeCellGrid implements IMaze{
+class Maze extends MazeCellGrid implements IMaze {
 
 	public Maze(CellGrid grid) {
 		super(grid);
@@ -22,4 +22,5 @@ class Maze extends MazeCellGrid implements IMaze{
 		this.grid.draw2D(g);
 	}
 
+	
 }

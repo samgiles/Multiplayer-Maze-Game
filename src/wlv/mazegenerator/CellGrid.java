@@ -70,11 +70,6 @@ public class CellGrid {
 				grid[r][c].draw2D(g, SIZE, x + (SIZE * c), y - (SIZE * r));
 			}
 		}
-		// Now plot current cell
-		int cx = SIZE * currentCell.getCol() + 10;
-		int cy = y - (SIZE * currentCell.getRow()) + 10;
-		g.setColor(255, 0, 0);
-		g.fillOval(cx, cy, 10, 10);
 	}
 
 	public void draw(IGraphicsContext g) {

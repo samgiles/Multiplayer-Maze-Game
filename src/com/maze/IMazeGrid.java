@@ -23,4 +23,15 @@ public interface IMazeGrid {
 	 */
 	public IMazeCell getMazeCell(int x, int y) throws IllegalArgumentException;
 	
+	/**
+	 * Gets the maze cell representing the start of the maze.
+	 * @return IMazeCell
+	 */
+	public IMazeCell getStartCell();
+	
+	/**
+	 * Gets the maze cell representing the end of the maze.
+	 * @return IMazeCell
+	 */
+	public IMazeCell getEndCell();
 }

@@ -19,7 +19,7 @@ public final class MazeFactory {
 		this.generator = generator;
 	}
 	
-	public static IMazeGrid newSimpleGrid(String saveTo, int width, int height) {
+	public static IMaze newSimpleGrid(String saveTo, int width, int height) {
 		
 		synchronized(lock) {
 			if (MazeFactory.factory == null){

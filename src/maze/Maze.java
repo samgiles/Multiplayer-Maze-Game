@@ -13,5 +13,5 @@ public class Maze {
 		this.maze = maze;
 	}
 	
-	
+
 }
