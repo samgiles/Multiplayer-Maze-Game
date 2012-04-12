@@ -1,5 +1,7 @@
 package entities;
 
+import com.graphics.IGraphicsContext;
+
 /**
  * Controls an entities interactions.
  * @author Samuel Giles
@@ -59,6 +61,12 @@ public class EntityController {
 			}
 			
 		};
+	}
+	
+	public void draw(IGraphicsContext graphics) {
+		// TODO
+		graphics.setColor(0xFF, 0, 0);
+		graphics.drawText("O", (float)this.entity.getPositionX(), (float)this.entity.getPositionY());
 	}
 	
 	/**

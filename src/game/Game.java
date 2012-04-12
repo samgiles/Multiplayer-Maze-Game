@@ -29,5 +29,7 @@ public class Game {
 	
 	public void draw(IGraphicsContext context) {
 		maze.draw(context);
+		playerA.draw(context);
+		playerB.draw(context);
 	}
 }
