@@ -57,4 +57,9 @@ public class AWTGraphicsContext implements IGraphicsContext {
 	public void fillRect(int x, int y, int width, int height) {
 		graphics.fillRect(x, y, width, height);
 	}
+
+	@Override
+	public void setColor(int color) {
+		graphics.setColor(new java.awt.Color(color));
+	}
 }

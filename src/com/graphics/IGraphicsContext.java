@@ -47,6 +47,8 @@ public interface IGraphicsContext {
 	void drawLine (int startX, int startY, int stopX, int stopY);
 
 	void setColor(int red, int green, int blue);
+	
+	void setColor(int color);
 
 	int getColor();
 	

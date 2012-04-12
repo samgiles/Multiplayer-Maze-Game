@@ -4,9 +4,6 @@ package wlv.mazegenerator;
  *  @author Gordon Branson.
  */
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 import com.graphics.IGraphicsContext;
 
 public class Cell {

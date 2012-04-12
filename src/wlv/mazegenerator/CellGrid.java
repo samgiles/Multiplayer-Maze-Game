@@ -4,9 +4,7 @@ package wlv.mazegenerator;
  *  @author Gordon Branson.
  */
 
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.Graphics;
+import android.graphics.Color;
 
 import com.graphics.IGraphicsContext;
 
@@ -59,10 +57,10 @@ public class CellGrid {
 	}
 
 	public void draw2D(IGraphicsContext g) {
-		Color old = new Color(g.getColor());
+		int oldColour = g.getColor();
 		g.setColor(0, 0, 0);
 		g.fillRect(0, 0, col * SIZE + 10, row * SIZE + 10);
-		g.setColor(old.getRed(), old.getGreen(), old.getBlue());
+		g.setColor(oldColour);
 		int x = 0;
 		int y = SIZE * (row - 1);
 		for (int r = 0; r < row; r++) {
@@ -82,8 +80,12 @@ public class CellGrid {
 		}
 	}
 
-	public Dimension getSize() {
-		return new Dimension(SIZE * row, SIZE * col);
+	public int getSizeX() {
+		return SIZE * row;
+	}
+	
+	public int getSizeY() {
+		return SIZE * col;
 	}
 
 	public int getCellNumber(int r, int c) {

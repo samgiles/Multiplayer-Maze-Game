@@ -11,17 +11,20 @@ package wlv.mazegenerator;
  *  @date February 2012.
  */
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import javax.imageio.ImageIO;
+import android.content.ContentResolver;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.provider.MediaStore;
+import android.provider.MediaStore.Images;
 
-import com.graphics.AWTGraphicsContext;
+import com.graphics.AndroidGraphicsContext;
 
 public class MazeGenerator {
 
@@ -221,24 +224,24 @@ public class MazeGenerator {
 		grid.setCurrentCell(start);
 	}
 
-	private BufferedImage generateImage() {
-		Dimension size = grid.getSize();
-		BufferedImage image = new BufferedImage(size.width, size.height,
-				BufferedImage.TYPE_INT_RGB);
-		Graphics g = image.getGraphics();
-		
-		AWTGraphicsContext graphics = new AWTGraphicsContext(g);
+	private Bitmap generateImage() {
+		int x = grid.getSizeX();
+		int y = grid.getSizeY();
+		Bitmap image = Bitmap.createBitmap(x, y, Config.ARGB_8888);
+		Canvas g = new Canvas(image);
+		AndroidGraphicsContext graphics = new AndroidGraphicsContext(g);
 		
 		grid.draw2D(graphics);
 		return image;
 	}
 
 	private void writeJpeg(String filename) {
-		BufferedImage image = this.generateImage();
+		Bitmap image = this.generateImage();
 		try {
-			ImageIO.write(image, "jpg", new File(filename));
-		} catch (IOException e) {
-			e.printStackTrace();
+		       FileOutputStream out = new FileOutputStream(filename);
+		       image.compress(Bitmap.CompressFormat.JPEG, 90, out);
+		} catch (Exception e) {
+		       e.printStackTrace();
 		}
 	}
 
