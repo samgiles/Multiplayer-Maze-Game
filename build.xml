@@ -62,8 +62,9 @@
 			<cobertura-report srcdir="src" destdir="build/logs" format="xml" />
 		</target>
 		
-		<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
+		
 		<target name="pmd">
+		    <taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
 			<mkdir dir="${basedir}/build/logs"/>
 			<taskdef name="pmd" classname="net.sourceforge.pmd.ant.PMDTask"/>
 			<pmd rulesetfiles="${basedir}/build/pmdrules.xml">
