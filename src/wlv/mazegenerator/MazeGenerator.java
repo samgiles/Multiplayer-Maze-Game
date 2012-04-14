@@ -205,7 +205,6 @@ public class MazeGenerator {
 		start = new CellRef(0, curCol, 'N');
 		curNum = 1;
 		CellRef entry = new CellRef(curRow, curCol, dir);
-		grid.clearCellWall(curRow, curCol, 'S');
 		grid.setStart(new CellRef(0, curCol, 'S'));
 		stack.push(entry);
 		while (!stack.isEmpty()) {

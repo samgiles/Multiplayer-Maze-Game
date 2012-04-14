@@ -26,7 +26,7 @@ public class GamePanel extends javax.swing.JPanel {
 		MazeController maze = new MazeController(imaze);
 		
 		AWTMoveHandler moveHandler = new AWTMoveHandler();	
-		frame.getContentPane().add(new GamePanel(new Game(maze, moveHandler, new Entity(), new Entity(), false)));
+		frame.getContentPane().add(new GamePanel(new Game(maze, moveHandler, new Entity(), new Entity(), true)));
 		// At the moment the order of the draw is important, as it is tied into the moveListener...
 		moveHandler.listen(new entities.MovementListener(){
 
