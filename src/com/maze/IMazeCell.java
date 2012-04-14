@@ -14,4 +14,8 @@ public interface IMazeCell {
 	 * @return boolean True if this cell is a wall in the specified direction, false if not.
 	 */
 	public boolean isWall(MoveDirection direction);
+
+	public int getX();
+	
+	public int getY();
 }

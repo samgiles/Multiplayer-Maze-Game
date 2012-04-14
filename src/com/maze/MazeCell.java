@@ -16,8 +16,13 @@ class MazeCell implements IMazeCell {
 
 	private final Cell cell;
 	
-	public MazeCell(Cell cell) {
+	private final int x;
+	private final int y;
+	
+	public MazeCell(Cell cell, int x, int y) {
 		this.cell = cell;
+		this.x = x;
+		this.y = y;
 	}
 	
 	/**
@@ -44,4 +49,13 @@ class MazeCell implements IMazeCell {
 		return result;
 	}
 
+	@Override
+	public int getX() {
+		return x;
+	}
+
+	@Override
+	public int getY() {
+		return y;
+	}
 }

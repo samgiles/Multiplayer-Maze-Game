@@ -1,5 +1,7 @@
 package com.maze;
 
+import com.MoveDirection;
+
 import wlv.mazegenerator.Cell;
 import wlv.mazegenerator.CellGrid;
 import wlv.mazegenerator.CellRef;
@@ -59,13 +61,21 @@ class MazeCellGrid implements IMazeGrid {
 			throw new IllegalArgumentException("Parameter Y is not within range, must be greater than 0 and less than getSizeY()");
 		}
 		
-		return new MazeCell(grid.getGrid()[x][y]);
+		return new MazeCell(grid.getGrid()[x][y], x, y);
 	}
 
 	@Override
 	public IMazeCell getStartCell() {
 		CellRef ref = this.grid.getStart();
 		return getMazeCell(ref.getRow(), ref.getCol());
+	}
+	
+	public MoveDirection getStartDirection() {
+		return MoveDirection.convert(this.grid.getStart().getDir());
+	}
+	
+	public MoveDirection getEndDirection() {
+		return MoveDirection.convert(this.grid.getExit().getDir());
 	}
 	
 	@Override

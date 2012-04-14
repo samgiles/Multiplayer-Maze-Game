@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.Random;
 
+import maze.MazeController;
+
 import org.junit.*;
 
 import tests.entities.mockobjects.MockMoveHandler;
@@ -26,7 +28,7 @@ public class EntityControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		testEntity = new Entity();
-		entityController = new EntityController(testEntity, moveHandler);
+		entityController = new EntityController(testEntity, moveHandler, new MazeController(null));
 		testEntity.setPositionX(0);
 		testEntity.setPositionY(0);
 	}

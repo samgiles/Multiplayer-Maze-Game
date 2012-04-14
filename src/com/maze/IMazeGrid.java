@@ -1,5 +1,7 @@
 package com.maze;
 
+import com.MoveDirection;
+
 public interface IMazeGrid {
 	
 	/**
@@ -34,4 +36,8 @@ public interface IMazeGrid {
 	 * @return IMazeCell
 	 */
 	public IMazeCell getEndCell();
+	
+	public MoveDirection getEndDirection();
+	
+	public MoveDirection getStartDirection();
 }

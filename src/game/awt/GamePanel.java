@@ -18,12 +18,11 @@ import maze.MazeController;
 
 public class GamePanel extends javax.swing.JPanel {
 
-	
 	private Game game;
 	
 	public static void main(String[] args) {
 		final JFrame frame = new JFrame();
-		IMaze imaze = MazeFactory.newSimpleGrid("maze.jpg", 20, 20);
+		IMaze imaze = MazeFactory.newSimpleGrid("maze.jpg", 100, 100);
 		MazeController maze = new MazeController(imaze);
 		
 		AWTMoveHandler moveHandler = new AWTMoveHandler();

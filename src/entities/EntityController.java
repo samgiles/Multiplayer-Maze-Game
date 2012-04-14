@@ -1,5 +1,7 @@
 package entities;
 
+import maze.MazeController;
+
 import com.graphics.IGraphicsContext;
 
 /**
@@ -19,18 +21,19 @@ public class EntityController {
 	 */
     private final MoveHandler moveHandler;
 	
-	public EntityController(Entity entity, MoveHandler moveHandler) {
+	public EntityController(Entity entity, MoveHandler moveHandler, MazeController maze) {
 		this.entity = entity;
 		this.moveHandler = moveHandler;
-		
-		this.registerMovementListener();
+		this.entity.setPositionX(maze.getStart().getY());
+		this.entity.setPositionY(maze.getStart().getX());
+		this.registerMovementListener(maze);
 	}
 	
 	/**
 	 * Register this EntityControllers MovementListener anonymous class, defined in MovemenetListener.getListener with the move handler.
 	 */
-	private void registerMovementListener() {
-		this.moveHandler.listen(this.getListener());
+	private void registerMovementListener(MazeController maze) {
+		this.moveHandler.listen(new CollisionActionController(this.getListener(), maze, this));
 	}
 	
 	/**
@@ -42,12 +45,12 @@ public class EntityController {
 
 			@Override
 			public void onMoveUp() {
-				EntityController.this.entity.addToPositionY(-MOVE_CONSTANT);
+				EntityController.this.entity.addToPositionY(MOVE_CONSTANT);
 			}
 
 			@Override
 			public void onMoveDown() {
-				EntityController.this.entity.addToPositionY(MOVE_CONSTANT);
+				EntityController.this.entity.addToPositionY(-MOVE_CONSTANT);
 			}
 
 			@Override
@@ -66,7 +69,10 @@ public class EntityController {
 	public void draw(IGraphicsContext graphics) {
 		// TODO
 		graphics.setColor(0xFF, 0, 0);
-		graphics.drawText("O", (float)this.entity.getPositionX(), (float)this.entity.getPositionY());
+		graphics.fillOval(
+				(int)(((float)this.entity.getPositionX() + 1) * 30) - 20,  // X
+				(int)(Math.abs(((float)this.entity.getPositionY() - 10)) * 30) - 20, // Y
+				10, 10);
 	}
 	
 	/**
