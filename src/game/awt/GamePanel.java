@@ -25,8 +25,9 @@ public class GamePanel extends javax.swing.JPanel {
 		IMaze imaze = MazeFactory.newSimpleGrid("maze.jpg", 100, 100);
 		MazeController maze = new MazeController(imaze);
 		
-		AWTMoveHandler moveHandler = new AWTMoveHandler();
-		
+		AWTMoveHandler moveHandler = new AWTMoveHandler();	
+		frame.getContentPane().add(new GamePanel(new Game(maze, moveHandler, new Entity(), new Entity(), false)));
+		// At the moment the order of the draw is important, as it is tied into the moveListener...
 		moveHandler.listen(new entities.MovementListener(){
 
 			@Override
@@ -50,8 +51,6 @@ public class GamePanel extends javax.swing.JPanel {
 			}
 
 		});
-		
-		frame.getContentPane().add(new GamePanel(new Game(maze, moveHandler, new Entity(), new Entity(), false)));
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.addKeyListener(moveHandler);
 		frame.pack();
