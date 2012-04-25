@@ -1,7 +1,9 @@
 package entities;
 
+import game.Game;
 import maze.MazeController;
 
+import com.MazeCompletedAction;
 import com.graphics.IGraphicsContext;
 
 /**
@@ -20,20 +22,41 @@ public class EntityController {
 	 * The move handler that controls this entities movement.
 	 */
     private final MoveHandler moveHandler;
+    
+    private final Game game;
 	
-	public EntityController(Entity entity, MoveHandler moveHandler, MazeController maze) {
+	public EntityController(Game game, Entity entity, MoveHandler moveHandler) {
 		this.entity = entity;
+		this.game = game;
 		this.moveHandler = moveHandler;
-		this.entity.setPositionX(maze.getStart().getY());
-		this.entity.setPositionY(maze.getStart().getX());
-		this.registerMovementListener(maze);
+		resetPosition();
+		this.registerMovementListener();
+	}
+	
+	public void resetPosition() {
+		this.entity.setPositionX(game.getMaze().getStart().getX());
+		this.entity.setPositionY(game.getMaze().getStart().getY());
 	}
 	
 	/**
 	 * Register this EntityControllers MovementListener anonymous class, defined in MovemenetListener.getListener with the move handler.
 	 */
-	private void registerMovementListener(MazeController maze) {
-		this.moveHandler.listen(new CollisionActionController(this.getListener(), maze, this));
+	private void registerMovementListener() {
+		
+		this.moveHandler.listen(
+				new CollisionActionController(this.getListener(), game, this, 
+						new MazeCompleteActionController(this.getListener(), new MazeCompletedAction() {
+
+							@Override
+							public void mazeCompleted(EntityController entity,
+									MazeController maze) {
+								// Maze Completed! Notify the game!
+								System.out.println("Game Completed!");
+								
+								entity.entity.setScore(entity.entity.getScore() + 1);
+								
+								game.mazeCompleted(maze, entity);
+							}}, game, this)));
 	}
 	
 	/**

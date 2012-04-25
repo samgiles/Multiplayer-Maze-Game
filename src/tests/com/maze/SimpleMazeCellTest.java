@@ -4,33 +4,50 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import wlv.mazegenerator.Cell;
+
 import com.maze.*;
 
 
 public class SimpleMazeCellTest {
 	
 	@Test
-	public void testIsWallNorth() {
-		IMazeCell mazeCell = new MockMazeCell(true, false, false, false);
-		assertTrue("The cell was created with a northern wall, however the north wall was flagged as a non wall.", mazeCell.isWall(com.MoveDirection.UP));
+	public void testWallNorth() {
+		Cell cell = new Cell();
+		cell.setWallN(false);
+		
+		IMazeCell mazeCell = new MazeCell(cell, 0, 0);
+		
+		assertFalse("The cell was created with a northern wall, however the north wall was flagged as a non wall.", mazeCell.isWall(com.MoveDirection.UP));
 	}
 	
 	@Test
 	public void testIsWallEast() {
-		IMazeCell mazeCell = new MockMazeCell(false, true, false, false);
-		assertTrue("The cell was created with an eastern wall, however the east wall was flagged as a non wall.", mazeCell.isWall(com.MoveDirection.RIGHT));
+		Cell cell = new Cell();
+		cell.setWallE(false);
+		
+		IMazeCell mazeCell = new MazeCell(cell, 0, 0);
+		
+		assertFalse("The cell was created with an eastern wall, however the east wall was flagged as a non wall.", mazeCell.isWall(com.MoveDirection.RIGHT));
 	}
 	
 	@Test
 	public void testIsWallSouth() {
-		IMazeCell mazeCell = new MockMazeCell(false, false, true, false);
-		assertTrue("The cell was created with a southern wall, however the south wall was flagged as a non wall.", mazeCell.isWall(com.MoveDirection.DOWN));	
+		Cell cell = new Cell();
+		cell.setWallS(false);
+		
+		IMazeCell mazeCell = new MazeCell(cell, 0, 0);
+		
+		assertFalse("The cell was created with a southern wall, however the south wall was flagged as a non wall.", mazeCell.isWall(com.MoveDirection.DOWN));	
 	}
 	
 	@Test
 	public void testIsWallWest() {
-		IMazeCell mazeCell = new MockMazeCell(false, false, false, true);
-		assertTrue("The cell was created with a western wall, however the west wall was flagged as a non wall.", mazeCell.isWall(com.MoveDirection.LEFT));
+		Cell cell = new Cell();
+		cell.setWallW(false);
+		
+		IMazeCell mazeCell = new MazeCell(cell, 0, 0);
+		assertFalse("The cell was created with a western wall, however the west wall was flagged as a non wall.", mazeCell.isWall(com.MoveDirection.LEFT));
 	}
 	
 }

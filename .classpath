@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/home/sam/java/workspace/Maze/libs/db4o-8.0.184.15484-all-java5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

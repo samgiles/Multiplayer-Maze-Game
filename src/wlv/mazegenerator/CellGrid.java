@@ -16,29 +16,29 @@ public class CellGrid {
 	private int row;
 	private int col;
 	private Cell[][] grid;
-	private CellRef currentCell;
-	private CellRef start;
-	private CellRef exit;
+	private CellReference currentCell;
+	private CellReference start;
+	private CellReference exit;
 	private boolean loopEnabled;
 
 	public CellGrid() {
-		row = 1;
-		col = 1;
+		row = 10;
+		col = 10;
 		loopEnabled = false;
 		createNewGrid();
-		currentCell = new CellRef();
-		start = new CellRef();
-		exit = new CellRef();
+		currentCell = new CellReference();
+		start = new CellReference();
+		exit = new CellReference();
 	}
 
 	public CellGrid(int row, int col, boolean loopEnabled) {
 		this.row = row;
 		this.col = col;
 		this.loopEnabled = loopEnabled;
-		currentCell = new CellRef(0, 0, 'N');
+		currentCell = new CellReference(0, 0, 'N');
 		createNewGrid();
-		start = new CellRef(0, 0, 'N');
-		exit = new CellRef(0, col - 1, 'S');
+		start = new CellReference(0, 0, 'N');
+		exit = new CellReference(0, col - 1, 'S');
 	}
 
 	public final void createNewGrid() {
@@ -98,8 +98,8 @@ public class CellGrid {
 		return grid[r][c].getIfWall(w);
 	}
 
-	public boolean getCellWall(CellRef cref) {
-		return grid[cref.getRow()][cref.getCol()].getIfWall(cref.getDir());
+	public boolean getCellWall(CellReference cref) {
+		return grid[cref.getX()][cref.getY()].getIfWall(cref.getDirection());
 	}
 
 	public void setCellWall(int r, int c, char w) {
@@ -134,27 +134,27 @@ public class CellGrid {
 		this.grid = grid;
 	}
 
-	public CellRef getStart() {
+	public CellReference getStart() {
 		return start;
 	}
 
-	public void setStart(CellRef start) {
+	public void setStart(CellReference start) {
 		this.start = start;
 	}
 
-	public CellRef getExit() {
+	public CellReference getExit() {
 		return exit;
 	}
 
-	public void setExit(CellRef exit) {
+	public void setExit(CellReference exit) {
 		this.exit = exit;
 	}
 
-	public CellRef getCurrentCell() {
+	public CellReference getCurrentCell() {
 		return currentCell;
 	}
 
-	public void setCurrentCell(CellRef currentCell) {
+	public void setCurrentCell(CellReference currentCell) {
 		this.currentCell = currentCell;
 	}
 

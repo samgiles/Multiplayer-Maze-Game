@@ -1,5 +1,7 @@
 package tests.entities.mockobjects;
 
+import com.db4o.ObjectSet;
+
 import entities.Entity;
 import store.IDataSource;
 
@@ -38,6 +40,12 @@ public class MockEntityDataSource implements IDataSource<Entity> {
 	 */
 	public Entity load(){
 		return this.storedEntity;
+	}
+
+	@Override
+	public ObjectSet<Entity> query(Entity prototype) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

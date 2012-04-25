@@ -12,7 +12,7 @@ import com.MoveDirection;
  * @author Samuel Giles
  * @version 0.1
  */
-class MazeCell implements IMazeCell {
+public class MazeCell implements IMazeCell {
 
 	private final Cell cell;
 	
@@ -24,13 +24,13 @@ class MazeCell implements IMazeCell {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	/**
 	 * @see com.maze.IMazeCell#isWall(com.MoveDirection)
 	 */
 	@Override
 	public boolean isWall(MoveDirection direction) {
-		boolean result = false;
+		boolean result = true;
 		
 		switch(direction) {
 			case UP:
@@ -57,5 +57,33 @@ class MazeCell implements IMazeCell {
 	@Override
 	public int getY() {
 		return y;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		MazeCell cell = (MazeCell)obj;
+		return cell.x == x && cell.y == y;
+	}
+	
+	public String toString() {
+		String returnString = "[" + this.x + ", " + this.y + "] - Free Spaces: ";
+		
+		if (!isWall(MoveDirection.UP)) {
+			returnString += " UP ";
+		}
+		
+		if (!isWall(MoveDirection.DOWN)) {
+			returnString += " DOWN ";
+		}
+		
+		if (!isWall(MoveDirection.LEFT)) {
+			returnString += " LEFT ";
+		}
+		
+		if (!isWall(MoveDirection.RIGHT)) {
+			returnString += " RIGHT ";
+		}
+		
+		return returnString;
 	}
 }

@@ -4,23 +4,23 @@ package wlv.mazegenerator;
  * @author Gordon Branson.
  */
 
-public class CellRef {
+public class CellReference {
 	private int row;
 	private int col;
 	private char dir;
 
-	public CellRef() {
+	public CellReference() {
 		return;
 	}
 
-	public CellRef(int row, int col, char dir) {
+	public CellReference(int row, int col, char dir) {
 		this.row = row;
 		this.col = col;
 		this.dir = dir;
 		return;
 	}
 
-	public int getRow() {
+	public int getX() {
 		return row;
 	}
 
@@ -28,7 +28,7 @@ public class CellRef {
 		this.row = row;
 	}
 
-	public int getCol() {
+	public int getY() {
 		return col;
 	}
 
@@ -36,7 +36,7 @@ public class CellRef {
 		this.col = col;
 	}
 
-	public char getDir() {
+	public char getDirection() {
 		return dir;
 	}
 
@@ -51,8 +51,8 @@ public class CellRef {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof CellRef) {
-			CellRef that = (CellRef) obj;
+		if (obj instanceof CellReference) {
+			CellReference that = (CellReference) obj;
 			if ((this.row == that.row) && (this.col == that.col)
 					&& (this.dir == that.dir))
 				return true;

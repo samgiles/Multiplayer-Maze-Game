@@ -22,11 +22,10 @@ public class GamePanel extends javax.swing.JPanel {
 	
 	public static void main(String[] args) {
 		final JFrame frame = new JFrame();
-		IMaze imaze = MazeFactory.newSimpleGrid("maze.jpg", 100, 100);
-		MazeController maze = new MazeController(imaze);
+		
 		
 		AWTMoveHandler moveHandler = new AWTMoveHandler();	
-		frame.getContentPane().add(new GamePanel(new Game(maze, moveHandler, new Entity(), new Entity(), true)));
+		frame.getContentPane().add(new GamePanel(new Game(moveHandler, false)));
 		// At the moment the order of the draw is important, as it is tied into the moveListener...
 		moveHandler.listen(new entities.MovementListener(){
 
@@ -59,7 +58,7 @@ public class GamePanel extends javax.swing.JPanel {
 	
 	public GamePanel(Game game) {
 		this.game = game;
-		this.setPreferredSize(new Dimension(400, 600));
+		this.setPreferredSize(new Dimension(300, 300));
 	}
 
 	@Override

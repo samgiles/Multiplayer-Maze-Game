@@ -28,7 +28,7 @@ public class EntityControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		testEntity = new Entity();
-		entityController = new EntityController(testEntity, moveHandler, new MazeController(null));
+		entityController = new EntityController(null, testEntity, moveHandler);
 		testEntity.setPositionX(0);
 		testEntity.setPositionY(0);
 	}

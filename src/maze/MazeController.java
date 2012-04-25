@@ -18,6 +18,10 @@ public class MazeController {
 		return maze.getStartCell();
 	}
 	
+	public IMaze getMaze() {
+		return maze;
+	}
+	
 	public void draw(IGraphicsContext context) {
 		this.maze.draw(context);
 	}

@@ -1,22 +1,25 @@
 package com.maze;
 
 import com.MoveDirection;
+import java.util.*;
 
 import wlv.mazegenerator.Cell;
 import wlv.mazegenerator.CellGrid;
-import wlv.mazegenerator.CellRef;
+import wlv.mazegenerator.CellReference;
 
 /**
  * An implementation of an IMazeGrid that facades the wlv version of CellGrid.  This is internal and can only be used via it's interface.
  * @author Samuel Giles
  * @version 0.1
  */
-class MazeCellGrid implements IMazeGrid {
+public class MazeCellGrid implements IMazeGrid {
 
 	/**
 	 * The underlying wlv.mazegenerator.CellGrid
 	 */
 	protected final CellGrid grid;
+	
+	protected HashMap<Integer, LinkedHashMap<Integer, IMazeCell>> cells = null;
 	
 	/**
 	 * Creates a new MazeCellGrid using the wlv.mazegenerator.CellGrid as it's underlying representation.
@@ -32,7 +35,7 @@ class MazeCellGrid implements IMazeGrid {
 	 */
 	@Override
 	public int getSizeX() {
-		return grid.getRow();
+		return grid.getCol();
 	}
 
 	/**
@@ -41,7 +44,7 @@ class MazeCellGrid implements IMazeGrid {
 	 */
 	@Override
 	public int getSizeY() {
-		return grid.getCol();
+		return grid.getRow();
 	}
 
 	/**
@@ -53,35 +56,49 @@ class MazeCellGrid implements IMazeGrid {
 	 */
 	@Override
 	public IMazeCell getMazeCell(int x, int y) throws IllegalArgumentException {
-		if (x > getSizeX() || x < 0) {
+		if (x >= getSizeX() || x < 0) {
 			throw new IllegalArgumentException("Parameter X is not within range, must be greater than 0 and less than getSizeX()");
 		}
 		
-		if (y > getSizeY() || y < 0) {
+		if (y >= getSizeY() || y < 0) {
 			throw new IllegalArgumentException("Parameter Y is not within range, must be greater than 0 and less than getSizeY()");
 		}
 		
-		return new MazeCell(grid.getGrid()[x][y], x, y);
+		if (cells == null) {
+			cells = new LinkedHashMap<Integer, LinkedHashMap<Integer, IMazeCell>>();
+		}
+		
+		if (cells.get(x) == null) {
+			cells.put(x, new LinkedHashMap<Integer, IMazeCell>());
+		}
+		
+		IMazeCell cell = cells.get(x).get(y);
+		
+		if (cell == null) {
+			cells.get(x).put(y, new MazeCell(grid.getGrid()[x][y], x, y));
+		}
+		
+		return cells.get(x).get(y);
 	}
 
 	@Override
 	public IMazeCell getStartCell() {
-		CellRef ref = this.grid.getStart();
-		return getMazeCell(ref.getRow(), ref.getCol());
+		CellReference ref = this.grid.getStart();
+		return getMazeCell(ref.getY(), ref.getX());
 	}
 	
 	public MoveDirection getStartDirection() {
-		return MoveDirection.convert(this.grid.getStart().getDir());
+		return MoveDirection.convert(this.grid.getStart().getDirection());
 	}
 	
 	public MoveDirection getEndDirection() {
-		return MoveDirection.convert(this.grid.getExit().getDir());
+		return MoveDirection.convert(this.grid.getExit().getDirection());
 	}
 	
 	@Override
 	public IMazeCell getEndCell() {
-		CellRef ref = this.grid.getExit();
-		return getMazeCell(ref.getRow(), ref.getCol());
+		CellReference ref = this.grid.getExit();
+		return getMazeCell(ref.getY(), ref.getX());
 	}
 
 }

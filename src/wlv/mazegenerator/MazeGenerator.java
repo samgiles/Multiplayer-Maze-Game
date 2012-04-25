@@ -30,9 +30,9 @@ public class MazeGenerator {
 	private CellGrid grid;
 	private int row, col;
 	private int curRow, curCol, curNum;
-	private CellRef currentCell, start, exit;
+	private CellReference currentCell, start, exit;
 	private char dir;
-	private Stack<CellRef> stack;
+	private Stack<CellReference> stack;
 	private boolean loopEnabled;
 
 	public MazeGenerator() {
@@ -66,155 +66,174 @@ public class MazeGenerator {
 		return d;
 	}
 
-	private ArrayList<CellRef> countUnvisited(CellRef cref) {
-		int r = cref.getRow();
-		int c = cref.getCol();
-		char d = cref.getDir();
-		ArrayList<CellRef> possibles = new ArrayList<CellRef>();
-		switch (d) {
-		case 'N':
-		case 'n':
-			if (r < (row - 1))
-				if (grid.getCellNumber(r + 1, c) == 0)
-					possibles.add(new CellRef(r + 1, c, 'N'));
-			if (c > 0)
-				if (grid.getCellNumber(r, c - 1) == 0)
-					possibles.add(new CellRef(r, c - 1, 'W'));
-			if (c < (col - 1))
-				if (grid.getCellNumber(r, c + 1) == 0)
-					possibles.add(new CellRef(r, c + 1, 'E'));
-			break;
-		case 'S':
-		case 's':
-			if (r > 0)
-				if (grid.getCellNumber(r - 1, c) == 0)
-					possibles.add(new CellRef(r - 1, c, 'S'));
-			if (c > 0)
-				if (grid.getCellNumber(r, c - 1) == 0)
-					possibles.add(new CellRef(r, c - 1, 'W'));
-			if (c < (col - 1))
-				if (grid.getCellNumber(r, c + 1) == 0)
-					possibles.add(new CellRef(r, c + 1, 'E'));
-			break;
-		case 'W':
-		case 'w':
-			if (c > 0)
-				if (grid.getCellNumber(r, c - 1) == 0)
-					possibles.add(new CellRef(r, c - 1, 'W'));
-			if (r > 0)
-				if (grid.getCellNumber(r - 1, c) == 0)
-					possibles.add(new CellRef(r - 1, c, 'S'));
-			if (r < (row - 1))
-				if (grid.getCellNumber(r + 1, c) == 0)
-					possibles.add(new CellRef(r + 1, c, 'N'));
-			break;
-		case 'E':
-		case 'e':
-			if (c < (col - 1))
-				if (grid.getCellNumber(r, c + 1) == 0)
-					possibles.add(new CellRef(r, c + 1, 'E'));
-			if (r > 0)
-				if (r > 0)
-					if (grid.getCellNumber(r - 1, c) == 0)
-						possibles.add(new CellRef(r - 1, c, 'S'));
-			if (r < (row - 1))
-				if (grid.getCellNumber(r + 1, c) == 0)
-					possibles.add(new CellRef(r + 1, c, 'N'));
-			break;
+	private ArrayList<CellReference> countUnvisited(CellReference cellReference) {
+		int x 			= cellReference.getX();
+		int y 			= cellReference.getY();
+		char direction 	= cellReference.getDirection();
+		
+		ArrayList<CellReference> possibles = new ArrayList<CellReference>();
+		
+		switch (direction) {
+			case 'N':
+			case 'n':
+				if (x < (row - 1) && grid.getCellNumber(x + 1, y) == 0) {
+					possibles.add(new CellReference(x + 1, y, 'N'));
+				}
+				
+				if (y > 0) {
+					if (grid.getCellNumber(x, y - 1) == 0) {
+						possibles.add(new CellReference(x, y - 1, 'W'));
+					}
+				
+					if (y < (col - 1) && grid.getCellNumber(x, y + 1) == 0) {
+							possibles.add(new CellReference(x, y + 1, 'E'));
+					}
+				}
+					
+				break;
+			case 'S':
+			case 's':
+				
+				if (x > 0 && grid.getCellNumber(x - 1, y) == 0) {
+					possibles.add(new CellReference(x - 1, y, 'S'));
+				}
+					
+				if (y > 0 && grid.getCellNumber(x, y - 1) == 0) {
+					possibles.add(new CellReference(x, y - 1, 'W'));
+				}
+				
+				if (y > 0 && y < (col - 1) && grid.getCellNumber(x, y + 1) == 0){
+					possibles.add(new CellReference(x, y + 1, 'E'));
+				}
+
+				break;
+			case 'W':
+			case 'w':
+				
+				if (y > 0 && grid.getCellNumber(x, y - 1) == 0){ 
+					possibles.add(new CellReference(x, y - 1, 'W'));
+				}
+						
+				if (x > 0 && grid.getCellNumber(x - 1, y) == 0) {
+					possibles.add(new CellReference(x - 1, y, 'S'));
+				}
+				
+				if (x < (row - 1) && grid.getCellNumber(x + 1, y) == 0){ 
+					possibles.add(new CellReference(x + 1, y, 'N'));
+				}
+				
+				break;
+			case 'E':
+			case 'e':
+				
+				if (y < (col - 1) && grid.getCellNumber(x, y + 1) == 0) {
+						possibles.add(new CellReference(x, y + 1, 'E'));
+				}
+				
+				if (x > 0 && grid.getCellNumber(x - 1, y) == 0) {
+					possibles.add(new CellReference(x - 1, y, 'S'));
+				}
+				
+				if (x < (row - 1) && grid.getCellNumber(x + 1, y) == 0) {
+					possibles.add(new CellReference(x + 1, y, 'N'));
+				}
+				
+				break;
 		}
+		
 		return possibles;
 	}
 
-	private ArrayList<CellRef> countVisited(CellRef cref) {
-		int r = cref.getRow();
-		int c = cref.getCol();
-		char d = cref.getDir();
-		ArrayList<CellRef> possibles = new ArrayList<CellRef>();
+	private ArrayList<CellReference> countVisited(CellReference cref) {
+		int r = cref.getX();
+		int c = cref.getY();
+		char d = cref.getDirection();
+		ArrayList<CellReference> possibles = new ArrayList<CellReference>();
 		switch (d) {
 		case 'N':
 		case 'n':
 			if (r < (row - 1))
 				if (grid.getCellNumber(r + 1, c) > 0)
-					possibles.add(new CellRef(r + 1, c, 'N'));
+					possibles.add(new CellReference(r + 1, c, 'N'));
 			break;
 		case 'S':
 		case 's':
 			if (r > 0)
 				if (grid.getCellNumber(r - 1, c) > 0)
-					possibles.add(new CellRef(r - 1, c, 'S'));
+					possibles.add(new CellReference(r - 1, c, 'S'));
 			break;
 		case 'W':
 		case 'w':
 			if (c > 0)
 				if (grid.getCellNumber(r, c - 1) > 0)
-					possibles.add(new CellRef(r, c - 1, 'W'));
+					possibles.add(new CellReference(r, c - 1, 'W'));
 			break;
 		case 'E':
 		case 'e':
 			if (c < (col - 1))
 				if (grid.getCellNumber(r, c + 1) > 0)
-					possibles.add(new CellRef(r, c + 1, 'E'));
+					possibles.add(new CellReference(r, c + 1, 'E'));
 			break;
 		}
 		return possibles;
 	}
 
-	private void checkCell(CellRef cref) {
-		int curRow = cref.getRow();
-		int curCol = cref.getCol();
+	private void checkCell(CellReference cref) {
+		int curRow = cref.getX();
+		int curCol = cref.getY();
 		if (grid.getCellNumber(curRow, curCol) == 0)
 			grid.setCellNumber(curRow, curCol, curNum++);
-		ArrayList<CellRef> possibles = countUnvisited(cref);
+		ArrayList<CellReference> possibles = countUnvisited(cref);
 		int numCells = possibles.size();
 		if (numCells == 0) {
 			if (loopEnabled) {
 				if (getRand(50) > 0)
 					return;
 				// make a break into another allready visited cell
-				ArrayList<CellRef> poss = countVisited(cref);
+				ArrayList<CellReference> poss = countVisited(cref);
 				int numLoop = poss.size();
 				System.out.println("numLoop = " + numLoop);
 				if (numLoop < 1)
 					return;
 				int loopDestNum = getRand(numLoop + 1);
-				CellRef loopDest = poss.get(loopDestNum % numLoop);
-				grid.clearCellWall(cref.getRow(), cref.getCol(),
-						loopDest.getDir());
-				grid.clearCellWall(loopDest.getRow(), loopDest.getCol(),
-						reverse(loopDest.getDir()));
+				CellReference loopDest = poss.get(loopDestNum % numLoop);
+				grid.clearCellWall(cref.getX(), cref.getY(),
+						loopDest.getDirection());
+				grid.clearCellWall(loopDest.getX(), loopDest.getY(),
+						reverse(loopDest.getDirection()));
 			}
 			return;
 		}
 		int destNum = getRand(numCells);// try numCells + 1
 		if (numCells > 1)
 			stack.push(cref);
-		CellRef dest = possibles.get(destNum);// try destNum % numCells
-		grid.clearCellWall(cref.getRow(), cref.getCol(), dest.getDir());
-		grid.clearCellWall(dest.getRow(), dest.getCol(), reverse(dest.getDir()));
+		CellReference dest = possibles.get(destNum);// try destNum % numCells
+		grid.clearCellWall(cref.getX(), cref.getY(), dest.getDirection());
+		grid.clearCellWall(dest.getX(), dest.getY(), reverse(dest.getDirection()));
 		checkCell(dest);
 	}
 
 	private void generateMaze() {
-		stack = new Stack<CellRef>();
+		stack = new Stack<CellReference>();
 		grid = new CellGrid(row, col, loopEnabled);
 		// set initial direction as North
 		dir = 'N';
 		// set start cell in row 0
 		curRow = 0;
 		curCol = getRand(col);
-		start = new CellRef(0, curCol, 'N');
+		start = new CellReference(0, curCol, 'N');
 		curNum = 1;
-		CellRef entry = new CellRef(curRow, curCol, dir);
-		grid.setStart(new CellRef(0, curCol, 'S'));
+		CellReference entry = new CellReference(curRow, curCol, dir);
+		grid.setStart(new CellReference(0, curCol, 'S'));
 		stack.push(entry);
 		while (!stack.isEmpty()) {
-			CellRef next = stack.pop();
+			CellReference next = stack.pop();
 			checkCell(next);
 		}
 		// make exit in last row
 		curRow = row - 1;
 		curCol = getRand(col);
-		exit = new CellRef(curRow, curCol, 'N');
+		exit = new CellReference(curRow, curCol, 'N');
 		grid.clearCellWall(curRow, curCol, 'N');
 		grid.setExit(exit);
 		grid.setCurrentCell(start);

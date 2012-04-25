@@ -17,11 +17,18 @@ public class Entity {
 	 */
 	private double positionY;
 	
+	private String name;
+	
 	/**
 	 * Creates a new Entity.
 	 */
 	public Entity() {
 	  this.score = 0;
+	}
+	
+	public Entity(String name) {
+		this.score = 0;
+		this.name = name;
 	}
 	
 	/**
