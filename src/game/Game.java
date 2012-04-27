@@ -27,7 +27,7 @@ public class Game {
 	
 	private boolean drawMessage = false;
 	private String message = "";
-	AStarMoveHandler aiHandler;
+	MoveHandler aiHandler;
 	
 	public Game(MazeController maze, MoveHandler moveHandler, Entity entity) {
 		this.maze = maze;
@@ -56,8 +56,8 @@ public class Game {
 			entityLoader.savePlayer(ai);
 		}
 		
-		aiHandler = new AStarMoveHandler(this); // temp
-		
+		//aiHandler = new AStarMoveHandler(this); // temp
+		aiHandler = new MoveHandler() {};
 		// register AI Move handler
 		this.ai = new EntityController(this, ai, aiHandler);
 		
@@ -80,7 +80,7 @@ public class Game {
 		entityLoader.savePlayer(entity.getEntity());
 		
 		loadNewMaze();
-		aiHandler.reset();
+
 		ai.resetPosition();
 		player.resetPosition();
 	}
@@ -92,7 +92,6 @@ public class Game {
 	}
 	
 	public void draw(IGraphicsContext context) {
-		aiHandler.Update();
 		maze.draw(context);
 		player.draw(context);
 		ai.draw(context);

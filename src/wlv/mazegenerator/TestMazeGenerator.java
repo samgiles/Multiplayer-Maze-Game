@@ -49,6 +49,11 @@ public class TestMazeGenerator extends javax.swing.JPanel {
 		public void actionPerformed(ActionEvent e) {
 			// do action when key 'Left' is pressed
 			System.out.println("LEFT");
+			int x = grid.getCurrentCell().getCol();
+			// going left so x - 1
+			grid.setCurrentCellX(x - 1);
+			// redraw.
+			TestMazeGenerator.this.paint(TestMazeGenerator.this.getGraphics());
 		}
 	}
 

@@ -21,6 +21,22 @@ public class CellGrid {
 	private CellRef exit;
 	private boolean loopEnabled;
 
+	public int getCurrentCellX() {
+		return currentCell.getCol();
+	}
+	
+	public int getCurrentCellY(){
+		return currentCell.getRow();
+	}
+	
+	public void setCurrentCellX(int x) {
+		this.currentCell.setCol(x);
+	}
+	
+	public void setCurrentCellY(int y) {
+		this.currentCell.setRow(y);
+	}
+	
 	public CellGrid() {
 		row = 1;
 		col = 1;
