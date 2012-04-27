@@ -1,37 +1,40 @@
 package entities;
 
+import com.db4o.ObjectSet;
+
+import store.DataSourceFactory;
 import store.IDataSource;
 
-/**
- * Used to load Entities from a data source.
- * @author Samuel Giles
- *
- */
 public class EntityLoader {
 	
-	/**
-	 * The data source this entity loader will use to load the entites from.
-	 */
-	private final IDataSource<Entity> dataSource;
+	IDataSource<Entity> dataSource;
 	
-	public EntityLoader(IDataSource<Entity> entityDataSource) {
-		this.dataSource = entityDataSource;
+	public EntityLoader() {
+		/*try {
+			dataSource = DataSourceFactory.createTypedObjectStore(Entity.class);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 	
-	/**
-	 * Store the entity.
-	 * @param entity Entity The entity to store.
-	 * @return boolean Returns true on success false on failure.
-	 */
-	public boolean store(Entity entity) {
-		return dataSource.store(entity);
+	public Entity getPlayerByName(String name) {
+		/*ObjectSet<Entity> result = dataSource.query(new Entity(name));
+		
+		if (result.size() == 0) {
+			return null;
+		}
+		
+		return result.get(0);*/
+		return new Entity(name);
 	}
 	
-	/**
-	 * Loads an entity.
-	 * @return The entity loaded from the datasource.
-	 */
-	public Entity load(){
-		return dataSource.load();
+	public void savePlayer(Entity entity) {
+		/*boolean result = dataSource.store(entity);
+		
+		if (!result) {
+			// TODO logging.
+		}*/
 	}
+	
 }

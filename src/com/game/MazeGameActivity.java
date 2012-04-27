@@ -24,11 +24,13 @@ public class MazeGameActivity extends Activity {
 		IMaze imaze = MazeFactory.newSimpleGrid("maze.jpg", 20, 20);
 		MazeController maze = new MazeController(imaze);
 		moveHandler = new AndroidKeyMoveHandler();
-		game = new Game(maze, moveHandler, new Entity(), new Entity(), false);
+		game = new Game(moveHandler, false);
 	}
 	
 	public boolean onKeyDown(int keyCode, KeyEvent ev) {
 		moveHandler.keyPressed(ev);
+		 MazeGameView v = (MazeGameView) findViewById(R.id.mazeGame); 
+	     v.invalidate();
 		return true;
 	}
 	

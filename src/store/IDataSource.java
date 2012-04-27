@@ -1,5 +1,7 @@
 package store;
 
+import com.db4o.ObjectSet;
+
 public interface IDataSource<T> {
 	
 	/**
@@ -13,5 +15,5 @@ public interface IDataSource<T> {
 	 * Loads an object from the datasource.
 	 * @return T The loaded object.
 	 */
-	public T load();
+	public ObjectSet<T> query(T prototype);
 }
