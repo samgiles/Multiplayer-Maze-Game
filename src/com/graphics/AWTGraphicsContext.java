@@ -47,6 +47,11 @@ public class AWTGraphicsContext implements IGraphicsContext {
 	public int getColor() {
 		return graphics.getColor().getRGB();
 	}
+	
+	@Override
+	public void setColor(int value) {
+		graphics.setColor(new Color(value));
+	}
 
 	@Override
 	public void fillOval(int x, int y, int width, int height) {

@@ -16,32 +16,32 @@ public class CellGrid {
 	private int row;
 	private int col;
 	private Cell[][] grid;
-	private CellReference currentCell;
-	private CellReference start;
-	private CellReference exit;
+	private CellRef currentCell;
+	private CellRef start;
+	private CellRef exit;
 	private boolean loopEnabled;
 
 	public CellGrid() {
-		row = 10;
-		col = 10;
+		row = 1;
+		col = 1;
 		loopEnabled = false;
 		createNewGrid();
-		currentCell = new CellReference();
-		start = new CellReference();
-		exit = new CellReference();
+		currentCell = new CellRef();
+		start = new CellRef();
+		exit = new CellRef();
 	}
 
 	public CellGrid(int row, int col, boolean loopEnabled) {
 		this.row = row;
 		this.col = col;
 		this.loopEnabled = loopEnabled;
-		currentCell = new CellReference(0, 0, 'N');
+		currentCell = new CellRef(0, 0, 'N');
 		createNewGrid();
-		start = new CellReference(0, 0, 'N');
-		exit = new CellReference(0, col - 1, 'S');
+		start = new CellRef(0, 0, 'N');
+		exit = new CellRef(0, col - 1, 'S');
 	}
 
-	public final void createNewGrid() {
+	public void createNewGrid() {
 		grid = new Cell[row][col];
 		for (int r = 0; r < row; r++) {
 			for (int c = 0; c < col; c++) {
@@ -59,10 +59,11 @@ public class CellGrid {
 	}
 
 	public void draw2D(IGraphicsContext g) {
-		Color old = new Color(g.getColor());
-		g.setColor(0, 0, 0);
+		int old = g.getColor();
+		g.setColor(0,0,0);
 		g.fillRect(0, 0, col * SIZE + 10, row * SIZE + 10);
-		g.setColor(old.getRed(), old.getGreen(), old.getBlue());
+
+		g.setColor(old);
 		int x = 0;
 		int y = SIZE * (row - 1);
 		for (int r = 0; r < row; r++) {
@@ -70,6 +71,11 @@ public class CellGrid {
 				grid[r][c].draw2D(g, SIZE, x + (SIZE * c), y - (SIZE * r));
 			}
 		}
+		// Now plot current cell
+		int cx = SIZE * currentCell.getCol() + 10;
+		int cy = y - (SIZE * currentCell.getRow()) + 10;
+		g.setColor(255, 0, 0);
+		g.fillOval(cx, cy, 10, 10);
 	}
 
 	public void draw(IGraphicsContext g) {
@@ -98,8 +104,8 @@ public class CellGrid {
 		return grid[r][c].getIfWall(w);
 	}
 
-	public boolean getCellWall(CellReference cref) {
-		return grid[cref.getX()][cref.getY()].getIfWall(cref.getDirection());
+	public boolean getCellWall(CellRef cref) {
+		return grid[cref.getRow()][cref.getCol()].getIfWall(cref.getDir());
 	}
 
 	public void setCellWall(int r, int c, char w) {
@@ -134,27 +140,27 @@ public class CellGrid {
 		this.grid = grid;
 	}
 
-	public CellReference getStart() {
+	public CellRef getStart() {
 		return start;
 	}
 
-	public void setStart(CellReference start) {
+	public void setStart(CellRef start) {
 		this.start = start;
 	}
 
-	public CellReference getExit() {
+	public CellRef getExit() {
 		return exit;
 	}
 
-	public void setExit(CellReference exit) {
+	public void setExit(CellRef exit) {
 		this.exit = exit;
 	}
 
-	public CellReference getCurrentCell() {
+	public CellRef getCurrentCell() {
 		return currentCell;
 	}
 
-	public void setCurrentCell(CellReference currentCell) {
+	public void setCurrentCell(CellRef currentCell) {
 		this.currentCell = currentCell;
 	}
 

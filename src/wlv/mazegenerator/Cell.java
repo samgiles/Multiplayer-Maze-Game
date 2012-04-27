@@ -141,7 +141,8 @@ public class Cell {
 		}
 	}
 
-	private void doDraw(IGraphicsContext g, int size, int x, int y) {
+	public void draw2D(IGraphicsContext g, int size, int x, int y) {
+		g.setColor(0, 200, 0);
 		if (wallS) {
 			g.drawLine(x, y + size, x + size, y + size);
 			g.drawLine(x, y + size - 1, x + size, y + size - 1);
@@ -159,14 +160,24 @@ public class Cell {
 			g.drawLine(x + size - 1, y, x + size - 1, y + size);
 		}
 	}
-	
-	public void draw2D(IGraphicsContext g, int size, int x, int y) {
-		g.setColor(0, 200, 0);
-		doDraw(g, size, x, y);
-	}
 
 	public void draw(IGraphicsContext g, int size, int x, int y) {
-		doDraw(g, size, x, y);
+		if (wallS) {
+			g.drawLine(x, y + size, x + size, y + size);
+			g.drawLine(x, y + size - 1, x + size, y + size - 1);
+		}
+		if (wallN) {
+			g.drawLine(x, y, x + size, y);
+			g.drawLine(x, y + 1, x + size, y + 1);
+		}
+		if (wallW) {
+			g.drawLine(x, y, x, y + size);
+			g.drawLine(x + 1, y, x + 1, y + size);
+		}
+		if (wallE) {
+			g.drawLine(x + size, y, x + size, y + size);
+			g.drawLine(x + size - 1, y, x + size - 1, y + size);
+		}
 		String numStr = "" + number;
 		char[] data = numStr.toCharArray();
 		g.drawChars(data, 0, data.length, x + 5, y + (size / 2));

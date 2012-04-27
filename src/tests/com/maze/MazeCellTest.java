@@ -29,29 +29,36 @@ public class MazeCellTest {
 		assertTrue(cellUnderTest.isWall(MoveDirection.DOWN));
 		assertTrue(cellUnderTest.isWall(MoveDirection.LEFT));
 		assertFalse(cellUnderTest.isWall(MoveDirection.RIGHT));
-		
+		//cell.clearWall(MoveDirection.UP);
 		cell.clearWall('n');
 		assertFalse(cellUnderTest.isWall(MoveDirection.UP));
 		
+		//cell.setWall(MoveDirection.UP);
 		cell.setWall('n');
 		assertTrue(cellUnderTest.isWall(MoveDirection.UP));
 		
 		
+		//cell.clearWall(MoveDirection.DOWN);
 		cell.clearWall('s');
 		assertFalse(cellUnderTest.isWall(MoveDirection.DOWN));
 		
+		//cell.setWall(MoveDirection.DOWN);
 		cell.setWall('s');
 		assertTrue(cellUnderTest.isWall(MoveDirection.DOWN));
 		
+		//cell.clearWall(MoveDirection.RIGHT);
 		cell.clearWall('e');
 		assertFalse(cellUnderTest.isWall(MoveDirection.RIGHT));
 		
+		//cell.setWall(MoveDirection.RIGHT);
 		cell.setWall('e');
 		assertTrue(cellUnderTest.isWall(MoveDirection.RIGHT));
 		
+		//cell.clearWall(MoveDirection.LEFT);
 		cell.clearWall('w');
 		assertFalse(cellUnderTest.isWall(MoveDirection.LEFT));
 		
+		//cell.setWall(MoveDirection.LEFT);
 		cell.setWall('w');
 		assertTrue(cellUnderTest.isWall(MoveDirection.LEFT));
 	}

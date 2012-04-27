@@ -9,7 +9,6 @@ import com.maze.IMazeCell;
 import com.maze.MazeCellGrid;
 
 import wlv.mazegenerator.CellGrid;
-import wlv.mazegenerator.CellReference;
 
 public class MazeCellGridTest {
 
@@ -18,7 +17,7 @@ public class MazeCellGridTest {
 	
 	public MazeCellGridTest() {
 		// grids are initialised with ALL walls ON in ALL directions.
-		grid = new CellGrid();
+		grid = new CellGrid(10, 10, false);
 		testObject = new MazeCellGrid(grid);
 	}
 	
@@ -47,8 +46,8 @@ public class MazeCellGridTest {
 
 	@Test
 	public void testGetStartCell() {
-		int x = grid.getStart().getY();
-		int y = grid.getStart().getX();
+		int x = grid.getStart().getCol();
+		int y = grid.getStart().getRow();
 		
 		IMazeCell start = testObject.getStartCell();
 		assertTrue(start.getX() == x);
@@ -58,8 +57,8 @@ public class MazeCellGridTest {
 
 	@Test
 	public void testGetEndCell() {
-		int x = grid.getExit().getY();
-		int y = grid.getExit().getX();
+		int x = grid.getExit().getCol();
+		int y = grid.getExit().getRow();
 		
 		IMazeCell end = testObject.getEndCell();
 		assertTrue(end.getX() == x);

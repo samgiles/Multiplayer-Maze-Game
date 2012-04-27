@@ -2,8 +2,8 @@ package game;
 
 import store.DataSourceFactory;
 import store.IDataSource;
+import ai.AStarMoveHandler;
 import ai.RandomWalkerMoveHandler;
-import ai.SimpleGraphPathfinder;
 import ai.astar.Graph;
 import ai.astar.TreeVisualiser;
 
@@ -27,8 +27,12 @@ public class Game {
 	
 	private boolean drawMessage = false;
 	private String message = "";
-	SimpleGraphPathfinder aiHandler;
+	AStarMoveHandler aiHandler;
 	
+	public Game(MazeController maze, MoveHandler moveHandler, Entity entity) {
+		this.maze = maze;
+		this.player = new  EntityController(this, entity, moveHandler);
+	}
 	
 	public Game(MoveHandler moveHandler, boolean isAiEnemy) {
 		
@@ -52,7 +56,7 @@ public class Game {
 			entityLoader.savePlayer(ai);
 		}
 		
-		aiHandler = new SimpleGraphPathfinder(this); // temp
+		aiHandler = new AStarMoveHandler(this); // temp
 		
 		// register AI Move handler
 		this.ai = new EntityController(this, ai, aiHandler);

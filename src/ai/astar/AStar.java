@@ -147,7 +147,7 @@ public abstract class AStar<T> {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return new LinkedList<T>();
 	}
 	
 	/**

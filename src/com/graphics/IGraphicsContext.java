@@ -48,6 +48,8 @@ public interface IGraphicsContext {
 
 	void setColor(int red, int green, int blue);
 
+	void setColor(int value);
+	
 	int getColor();
 	
 	void fillOval(int x, int y, int width, int height);
