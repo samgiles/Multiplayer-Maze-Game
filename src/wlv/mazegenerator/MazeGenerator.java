@@ -11,20 +11,18 @@ package wlv.mazegenerator;
  *  @date February 2012.
  */
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import android.content.ContentResolver;
-import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
-import android.graphics.Canvas;
-import android.provider.MediaStore;
-import android.provider.MediaStore.Images;
+import javax.imageio.ImageIO;
 
-import com.graphics.AndroidGraphicsContext;
+import com.graphics.AWTGraphicsContext;
+import com.graphics.IGraphicsContext;
 
 public class MazeGenerator {
 
@@ -208,7 +206,6 @@ public class MazeGenerator {
 		start = new CellRef(0, curCol, 'N');
 		curNum = 1;
 		CellRef entry = new CellRef(curRow, curCol, dir);
-		grid.clearCellWall(curRow, curCol, 'S');
 		grid.setStart(new CellRef(0, curCol, 'S'));
 		stack.push(entry);
 		while (!stack.isEmpty()) {
@@ -224,26 +221,6 @@ public class MazeGenerator {
 		grid.setCurrentCell(start);
 	}
 
-	private Bitmap generateImage() {
-		int x = grid.getSizeX();
-		int y = grid.getSizeY();
-		Bitmap image = Bitmap.createBitmap(x, y, Config.ARGB_8888);
-		Canvas g = new Canvas(image);
-		AndroidGraphicsContext graphics = new AndroidGraphicsContext(g);
-		
-		grid.draw2D(graphics);
-		return image;
-	}
-
-	private void writeJpeg(String filename) {
-		Bitmap image = this.generateImage();
-		try {
-		       FileOutputStream out = new FileOutputStream(filename);
-		       image.compress(Bitmap.CompressFormat.JPEG, 90, out);
-		} catch (Exception e) {
-		       e.printStackTrace();
-		}
-	}
 
 	public CellGrid generateMaze(int width, int height) {
 		grid = new CellGrid(width, height, true);
@@ -254,14 +231,12 @@ public class MazeGenerator {
 	public CellGrid generateMaze(String filename, int width, int height) {
 		grid = new CellGrid(width, height, true);
 		generateMaze();
-		writeJpeg(filename);
 		return grid;
 	}
 
 	public CellGrid generateMaze(String filename) {
 		grid = new CellGrid(DEFAULT_WIDTH, DEFAULT_HEIGHT, true);
 		generateMaze();
-		writeJpeg(filename);
 		return grid;
 	}
 }
